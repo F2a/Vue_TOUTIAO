@@ -1,6 +1,6 @@
-# tt
+# Vue-TOUTIAO
 
-> vue
+> 使用Vue仿写《今日头条》app
 
 ## Build Setup
 
