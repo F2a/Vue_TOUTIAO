@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="mail" unicode="&#58881;" d="M831.936 128L192 127.808V517.696l302.816-192.704a32.096 32.096 0 0 1 34.4 0L832 517.696 831.936 128zM192 640.224l0.096-0.224L832 640.224v-46.656L512 389.952 192 593.568v46.656zM831.936 704h-639.84A64 64 0 0 1 128 640.224v-512.416C128 92.64 156.768 64 192.096 64h639.84A64 64 0 0 1 896 127.808V640.224A64 64 0 0 1 831.936 704z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="mail_fill" unicode="&#58882;" d="M512 320a32 32 0 0 0-17.184 4.992L128 558.432v-430.656A64 64 0 0 1 192.064 64h639.872A64 64 0 0 1 896 127.776V558.112l-366.816-233.12A32.096 32.096 0 0 0 512 320M831.936 704H192.064A64 64 0 0 1 128 640.192v-4.896L512 389.92l384 244.032v6.24A64 64 0 0 1 831.936 704"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>
