@@ -2,7 +2,25 @@
 
 > 使用Vue仿写《今日头条》app
 
-## Build Setup
+### 插件和工具
+* 引用-iconfont
+
+
+### 功能模块
+- [ ] 需求分析
+- [ ] 系统设计
+
+
+### 文件目录
+>> build
+>> config
+>> src
+>>> asset
+>>> common
+>>>> font
+>>>> style
+>> static
+
 
 ``` bash
 # install dependencies
@@ -23,5 +41,3 @@ npm run unit
 # run all tests
 npm test
 ```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
