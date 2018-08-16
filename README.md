@@ -1,9 +1,10 @@
 # Vue-TOUTIAO
 
-> 使用Vue仿写《今日头条》app
+> 使用Vue仿写《美团外卖》app
 
 ### 插件和工具
-* 引用-iconfont
+* 引用 iconfont
+* 接入 easy-mock
 
 
 ### 功能模块
@@ -11,16 +12,17 @@
 - [ ] 系统设计
 
 
-### 文件目录
->> build
->> config
->> src
->>> asset
->>> common
->>>> font
->>>> style
->> static
-
+### 文件布局
+``` bash
+|-- build                            // webpack配置文件
+|-- config                           // 项目打包路径
+|-- src                              // 源码目录
+|   |-- common                       // 公共资源目录
+|       |-- font                     // iconfont目录
+|       |-- style                    // 公共样式文件目录
+|   |-- components                   // 组件
+|-- static                           // 静态资源目录
+```
 
 ``` bash
 # install dependencies
