@@ -5,6 +5,7 @@
 ### 插件和工具
 * 引用 iconfont
 * 接入 easy-mock
+* 封装 axios
 
 
 ### 功能模块
