@@ -3,7 +3,9 @@
 > 使用Vue仿写《美团外卖》app
 
 ### 插件和工具
-* 引用 iconfont
+* 引入 iconfont
+* 引入 normalize
+* 引入 mint-ui
 * 接入 easy-mock
 * 封装 axios
 
