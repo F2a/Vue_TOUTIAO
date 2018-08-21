@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <v-meatType />
     <h3>title</h3>
     <i class="iconfont icon-mail"></i>
   </div>
@@ -7,20 +8,25 @@
 
 <script>
   import * as  api from '../common/service';
+  import meatType from './content/MeatType.vue';
+
   export default {
-    name: 'HelloWorld',
+    name: 'Home',
     data() {
       return {
         msg: 'Welcome to Your Vue.js App',
       };
     },
+    components: {
+      "v-meatType": meatType
+    },
     methods: {
-    async getList () {
-      const { data } = await api.getSeller();
-      console.log(data);
-//      if(data)
-//        this.$store.commit('getLists', data.result);
-    }
+      async getList () {
+        const { data } = await api.getSeller();
+        console.log(data);
+  //      if(data)
+  //        this.$store.commit('getLists', data.result);
+      }
     },
     beforeCreate() {
       console.log('在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用');

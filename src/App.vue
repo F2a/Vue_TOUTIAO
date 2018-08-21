@@ -1,14 +1,20 @@
 <template>
   <div id="app">
-    <router-view/>
+    <v-header />
+    <router-view />
   </div>
 </template>
 
 <script>
   import './common/fonts/iconfont.css'
-export default {
-  name: 'App',
-};
+  import './common/style/normalize.css'
+  import header from './components/header/Header.vue'
+  export default {
+    name: 'App',
+    components: {
+      "v-header": header,
+    },
+  };
 </script>
 
 <style>
