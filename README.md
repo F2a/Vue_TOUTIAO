@@ -1,13 +1,15 @@
 # Vue-TOUTIAO
 
+
 > 使用Vue仿写《美团外卖》app
 
+
 ### 插件和工具
-* 引入 iconfont
-* 引入 normalize
-* 引入 mint-ui
-* 接入 easy-mock
-* 封装 axios
+* 字体图标 iconfont
+* CSS扩展 less + normalize
+* 模拟接口 easy-mock
+* 接口封装 axios
+* 组件库 mint-ui
 
 
 ### 功能模块
@@ -26,6 +28,7 @@
 |   |-- components                   // 组件
 |-- static                           // 静态资源目录
 ```
+
 
 ``` bash
 # install dependencies

@@ -38,10 +38,10 @@
 </template>
 <script>
   export default {
-    name: 'MeatType.vue',
+    name: 'MeatType',
     data () {
       return {
-        title: 'MeatType.vue',
+        title: 'MeatType',
       }
     },
     methods: {}
@@ -54,6 +54,7 @@
   }
   .types{
     width: 25%;
+    cursor: pointer;
     text-align: center;
     float: left;
   }

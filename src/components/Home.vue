@@ -1,7 +1,9 @@
 <template>
   <div class="hello">
     <v-meatType />
-    <h3>title</h3>
+    <div class="shoplist-title">
+      <h4>推荐商家</h4>
+    </div>
     <i class="iconfont icon-mail"></i>
   </div>
 </template>
@@ -69,19 +71,31 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style lang="less" scoped>
+  .shoplist-title{
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: .96rem;
+    height: 9.6vw;
+    font-size: 1rem;
+    color: #000;
+    background-color: #fff;
+      &:after , &:before {
+         display: block;
+         content: "";
+         width: .533333rem;
+         width: 5.333333vw;
+         height: .026667rem;
+         height: .266667vw;
+         margin: 0 .346667rem;
+         background-color: #999;
+     }
+  }
 </style>
