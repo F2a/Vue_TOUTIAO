@@ -4,6 +4,7 @@
     <div class="shoplist-title">
       <h4>推荐商家</h4>
     </div>
+    <v-sellerList />
     <i class="iconfont icon-mail"></i>
   </div>
 </template>
@@ -11,6 +12,7 @@
 <script>
   import * as  api from '../common/service';
   import meatType from './content/MeatType.vue';
+  import sellerList from './content/SellerList.vue';
 
   export default {
     name: 'Home',
@@ -20,7 +22,8 @@
       };
     },
     components: {
-      "v-meatType": meatType
+      "v-meatType": meatType,
+      "v-sellerList": sellerList,
     },
     methods: {
       async getList () {
@@ -71,7 +74,10 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped>
+<style lang="less" rel="stylesheet/less" scoped>
+  h4{
+    font-size: 0.5rem;
+  }
   .shoplist-title{
     display: flex;
     -webkit-box-align: center;

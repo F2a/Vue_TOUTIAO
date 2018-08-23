@@ -11,6 +11,7 @@
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
+  font-size: 36px;
 }
 
 /* Sections
@@ -22,7 +23,6 @@ html {
 
 body {
   margin: 0;
-  font-size: 12px;
 }
 
 /**
@@ -68,8 +68,21 @@ pre {
 
 a {
   background-color: transparent;
+  text-decoration: none;
+  outline: none;
 }
 
+i, em {
+  font-style: normal;
+}
+
+ul, ol{
+  list-style-type: none;
+}
+li {
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
 /**
  * 1. Remove the bottom border in Chrome 57-
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
@@ -340,12 +353,24 @@ template {
 [hidden] {
   display: none;
 }
-/*  自定义class  */
-.clearBoth:after{
-  clear:both;
-  content:'.';
-  display:block;
-  width: 0;
+/*  自定义  */
+html, body, h1, h2, h3, h4, h5, h6, p, ul, ol, form, button, dl, dt, dd, input, textarea {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 0;
+  margin: 0;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
   height: 0;
-  visibility:hidden;
 }
