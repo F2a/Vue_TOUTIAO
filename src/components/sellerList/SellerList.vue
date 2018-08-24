@@ -55,10 +55,10 @@
 </template>
 <script>
   export default {
-    name: 'SellerList',
+    name: 'sellerList',
     data () {
       return {
-        title: 'SellerList',
+        title: 'sellerList',
       }
     },
     methods: {}

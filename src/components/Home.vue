@@ -12,7 +12,7 @@
 <script>
   import * as  api from '../common/service';
   import meatType from './content/MeatType.vue';
-  import sellerList from './content/SellerList.vue';
+  import sellerList from './sellerList/SellerList.vue';
 
   export default {
     name: 'Home',
