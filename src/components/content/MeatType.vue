@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="clearBoth typesBox">
+    <div class="clearfix typesBox">
       <a class="types">
         <div class="circle"></div>
         <span>美食</span>
@@ -51,6 +51,7 @@
   .typesBox{
     width: 100%;
     margin: 10px 0;
+    font-size: 14px;
   }
   .types{
     width: 25%;
@@ -59,9 +60,9 @@
     float: left;
   }
   .circle{
-    width: 3rem;
-    height: 3rem;
-    margin: 0.5rem auto;
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 0.15rem auto;
     border-radius: 50%;
     background-color: #ccc;
   }
