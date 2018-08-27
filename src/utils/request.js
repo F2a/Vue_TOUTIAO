@@ -3,7 +3,7 @@ import axios from 'axios'
 
 const axiosIns  = axios.create({
   baseURL: 'https://easy-mock.com/mock/5b73df8885b13978addd6e22/meituan/',
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
   },
