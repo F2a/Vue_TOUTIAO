@@ -5,14 +5,13 @@
       <h4>推荐商家</h4>
     </div>
     <v-sellerList />
-    <i class="iconfont icon-mail"></i>
+    <p style="font-size: 0.3rem; line-height: 1rem" >努力加载中...</p>
   </div>
 </template>
 
 <script>
-  import * as  api from '../common/service';
-  import meatType from './content/MeatType.vue';
-  import sellerList from './sellerList/SellerList.vue';
+  import meatType from '../components/meatTypes/MeatType.vue';
+  import sellerList from '../components/sellerList/SellerList.vue';
 
   export default {
     name: 'Home',
@@ -26,12 +25,7 @@
       "v-sellerList": sellerList,
     },
     methods: {
-      async getList () {
-        const { data } = await api.getSeller();
-        console.log(data);
-  //      if(data)
-  //        this.$store.commit('getLists', data.result);
-      }
+
     },
     beforeCreate() {
       console.log('在实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用');
@@ -43,7 +37,7 @@
       console.log('在挂载开始之前被调用');
     },
     mounted() {
-      this.getList()
+      console.log('挂载完成');
     },
     beforeUpdate() {
       console.log('数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前');

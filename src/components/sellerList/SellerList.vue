@@ -5,45 +5,59 @@
       <a href="javascript:;" class="nav-item nav-right-sep">综合排序</a>
       <a href="javascript:;" class="nav-item">筛选</a>
     </nav>
-    <div id="poilist" class="sellerlist">
+    <div
+      id="poilist"
+      class="sellerlist"
+      v-for="item in sellerList"
+    >
       <div class="field">
         <a href="/restaurant/540823287940595">
           <div class="avatar">
-            <img src="http://p0.meituan.net/waimaipoi/81a3854633f9c9f75b0aec70a410bcae59494.jpg.webp" data-src-retina="http://p0.meituan.net/waimaipoi/81a3854633f9c9f75b0aec70a410bcae59494.jpg.webp" class="j-poi-pic avatar-img">
+            <img :src="item.avatar" :data-src-retina="item.avatar" class="j-poi-pic avatar-img">
           </div>
         </a>
         <div class="content">
           <a href="/restaurant/540823287940595">
-            <div class="shop-title shop-title-icon-0">                                                    <div class="shop-na">哈卤卤汁饭（新开铺店）</div>
+            <div class="shop-title shop-title-icon-0">
+              <div class="shop-na">{{ item.name }}</div>
             </div>
             <div class="shop-mid-line clearfix">
               <div class="appr-status">
-                <i class="appr-score"></i>
-                <i class="appr-score"></i>
-                <i class="appr-score"></i>
-                <i class="appr-score"></i>
-                <i class="appr-score appr-score-gray"></i>
+                <i :class="['appr-score', item.score < 1&&'appr-score-gray' ]"></i>
+                <i :class="['appr-score', item.score < 2&&'appr-score-gray' ]"></i>
+                <i :class="['appr-score', item.score < 3&&'appr-score-gray' ]"></i>
+                <i :class="['appr-score', item.score < 4&&'appr-score-gray' ]"></i>
+                <i :class="['appr-score', item.score < 5&&'appr-score-gray' ]"></i>
               </div>
-              <div class="shop-sold mtsi-num">月售345</div>
-              <i class="shop-right mtsi-num">5.0km</i>
+              <div class="shop-sold mtsi-num">月售{{ item.sellCount }}</div>
+              <i class="shop-right mtsi-num">{{ item.distance }}km</i>
               <i class="shop-dvd-line">|</i>
-              <i class="shop-delivery-time mtsi-num">47min</i>
+              <i class="shop-delivery-time mtsi-num">{{ item.deliveryTime }}min</i>
             </div>
             <div class="shop-line clearfix">
-              <span class="shop-line-item">起送价<em class="mtsi-num">￥12</em></span>
-              <span class="shop-line-item mtsi-num"><span class="shop-line-item-line">|</span>配送 ¥5</span>
-              <div class="allocation-icon"><span>美团专送</span></div>
+              <span class="shop-line-item">起送价
+                <em class="mtsi-num">￥{{ item.minPrice }}</em>
+              </span>
+              <span class="shop-line-item mtsi-num"><span class="shop-line-item-line">|</span>配送 ¥{{ item.serviceScore }}</span>
+              <div v-if="item.delivery" class="allocation-icon"><span>美团专送</span></div>
               <div class="clear"></div>
             </div>
             <div class="clearfix shop-discount-entries">
-              <ul class="shop-discount-entry-wrap-overflow clearfix">
-                <li class="shop-discount-entry clearfix">
-                  <i class="i-x12"><img class="i-x12 bugimg" src="http://p0.meituan.net/xianfu/c2c0f31d0ebf0f60af115d058169c492992.png.webp"></i>
-                  <p class="shop-discount-overflow mtsi-num">有机会领取商家代金券</p>
-                </li>
-                <li class="shop-discount-entry clearfix">
-                  <i class="i-x12"><img class="i-x12 bugimg" src="http://p0.meituan.net/xianfu/652eea4034250563fe11b02e3219ba8d981.png.webp"></i>
-                  <p class="shop-discount-overflow mtsi-num">实际支付35元返4元商家代金券</p>
+              <ul
+                class="shop-discount-entry-wrap-overflow clearfix"
+                v-for="val in item.supports"
+              >
+                <li v-if="val.show" class="shop-discount-entry clearfix">
+                  <i :class="[
+                  'iconfont',
+                   'i-x12',
+                    val.type==0?'icon-youhuijuan':
+                    val.type==1?'icon-manjian':
+                    val.type==2?'icon-weibiaoti-':
+                    val.type==3?'icon-baozhengjin':
+                    val.type==4?'icon-zhekou':''
+                  ]"></i>
+                  <p class="shop-discount-overflow mtsi-num">{{ val.description }}</p>
                 </li>
               </ul>
             </div>
@@ -54,14 +68,32 @@
   </div>
 </template>
 <script>
+  import { mapGetters, mapActions } from 'vuex'
+
   export default {
-    name: 'sellerList',
-    data () {
-      return {
-        title: 'sellerList',
+    mounted() {
+     this.UpdateList();
+      window.addEventListener('scroll', this.pushList)
+    },
+    methods: {
+      ...mapActions({
+        UpdateList: 'getList', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+      }),
+      pushList(e) {
+        const scrollPosition = document.body.scrollTop + document.documentElement.scrollTop;
+        const bodyHeight = document.body.scrollHeight - document.documentElement.clientHeight;
+        console.log(scrollPosition, bodyHeight);
+        if(scrollPosition + 500 > bodyHeight){
+           this.UpdateList();
+        }
       }
     },
-    methods: {}
+    computed: {
+      ...mapGetters([
+        'spanning',
+        'sellerList',
+      ])
+    },
   }
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
@@ -280,6 +312,7 @@
                 float: left;
               }
               .i-x12 {
+                width: 0.38rem;
                 height: 0.38rem;
                 display: block;
                 position: absolute;
