@@ -8,16 +8,15 @@
     <div
       id="poilist"
       class="sellerlist"
-      v-for="item in sellerList"
     >
-      <div class="field">
-        <a href="/restaurant/540823287940595">
+      <div v-for="item in sellerList" class="field">
+        <a>
           <div class="avatar">
             <img :src="item.avatar" :data-src-retina="item.avatar" class="j-poi-pic avatar-img">
           </div>
         </a>
         <div class="content">
-          <a href="/restaurant/540823287940595">
+          <a>
             <div class="shop-title shop-title-icon-0">
               <div class="shop-na">{{ item.name }}</div>
             </div>
@@ -42,12 +41,12 @@
               <div v-if="item.delivery" class="allocation-icon"><span>美团专送</span></div>
               <div class="clear"></div>
             </div>
-            <div class="clearfix shop-discount-entries">
+            <div @click="showDiscount($event)" :class="['clearfix', 'shop-discount-entries', { 'shop-discount-entries-show': shopDiscount }]">
+              <div :class="['discount-down', { 'discount-up': shopDiscount }]">&lt;</div>
               <ul
                 class="shop-discount-entry-wrap-overflow clearfix"
-                v-for="val in item.supports"
               >
-                <li v-if="val.show" class="shop-discount-entry clearfix">
+                <li v-for="val in item.supports" v-if="val.show" class="shop-discount-entry clearfix">
                   <i :class="[
                   'iconfont',
                    'i-x12',
@@ -71,6 +70,11 @@
   import { mapGetters, mapActions } from 'vuex'
 
   export default {
+    data (){
+      return {
+        shopDiscount: false,
+      }
+    },
     mounted() {
      this.UpdateList();
       window.addEventListener('scroll', this.pushList)
@@ -79,6 +83,12 @@
       ...mapActions({
         UpdateList: 'getList', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
       }),
+      showDiscount (e){
+        console.log(this.shopDiscount);
+        e.preventDefault();
+        e.stopPropagation();
+        this.shopDiscount = !this.shopDiscount;
+      },
       pushList(e) {
         const scrollPosition = document.body.scrollTop + document.documentElement.scrollTop;
         const bodyHeight = document.body.scrollHeight - document.documentElement.clientHeight;
@@ -298,10 +308,36 @@
         }
         /* 活动 */
         .shop-discount-entries {
+          max-height: 1rem;
           font-size: 11px;
           color: #898989;
           padding-top: 0.5rem;
           position: relative;
+          overflow: hidden;
+          transition: .3s;
+          &.shop-discount-entries-show{
+            height: auto;
+            max-height: 5rem;
+            transition: .3s;
+          }
+          .discount-down{
+            display: inline-block;
+            box-sizing: border-box;
+            color: #5f5f5f;
+            font-size: 0.35rem;
+            font-weight: 800;
+            position: absolute;
+            right: 0.5rem;
+            transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            -moz-transform: rotate(-90deg);
+            transition: .3s;
+          }
+          .discount-up{
+            transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+          }
           .shop-discount-entry-wrap-overflow {
             width: 70%;
             .shop-discount-entry {
