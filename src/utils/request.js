@@ -37,13 +37,12 @@ function statusError(status) { //响应后台的状态错误
   }
 }
 function err(info) {
-  console.log(info);
-  console.log('timeout of'.includes(info));
-  if ('timeout of 10000ms exceeded'.includes(info)) {
-    const result = { errmsg: '网络未连接，请检查网络设置' };
-    console.log('连接easy-mock超时，将只展示固定资源页面。');
-    return result;
-  }
+
+  // if ('timeout of 10000ms exceeded'.includes(info)) {
+  //   const result = { errmsg: '网络未连接，请检查网络设置' };
+  //   console.log('连接easy-mock超时，将只展示固定资源页面。');
+  //   return result;
+  // }
 }
 
 

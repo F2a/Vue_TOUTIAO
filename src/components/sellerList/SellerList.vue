@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="poifilter-nav">
+    <nav ref="poifilterNav" :class="['poifilter-nav', {'fixed-nav': transform}]">
       <a href="javascript:;" class="nav-item nav-right-sep">选项一</a>
       <a href="javascript:;" class="nav-item nav-right-sep">综合排序</a>
       <a href="javascript:;" class="nav-item">筛选</a>
@@ -8,6 +8,7 @@
     <div
       id="poilist"
       class="sellerlist"
+      :style="{ 'margin-top': transform?'50px':'0' }"
     >
       <div v-for="item in sellerList" class="field">
         <a>
@@ -41,25 +42,7 @@
               <div v-if="item.delivery" class="allocation-icon"><span>美团专送</span></div>
               <div class="clear"></div>
             </div>
-            <div @click="showDiscount($event)" :class="['clearfix', 'shop-discount-entries', { 'shop-discount-entries-show': shopDiscount }]">
-              <div :class="['discount-down', { 'discount-up': shopDiscount }]">&lt;</div>
-              <ul
-                class="shop-discount-entry-wrap-overflow clearfix"
-              >
-                <li v-for="val in item.supports" v-if="val.show" class="shop-discount-entry clearfix">
-                  <i :class="[
-                  'iconfont',
-                   'i-x12',
-                    val.type==0?'icon-youhuijuan':
-                    val.type==1?'icon-manjian':
-                    val.type==2?'icon-weibiaoti-':
-                    val.type==3?'icon-baozhengjin':
-                    val.type==4?'icon-zhekou':''
-                  ]"></i>
-                  <p class="shop-discount-overflow mtsi-num">{{ val.description }}</p>
-                </li>
-              </ul>
-            </div>
+            <v-discount :supports="item.supports" />
           </a>
         </div>
       </div>
@@ -68,35 +51,43 @@
 </template>
 <script>
   import { mapGetters, mapActions } from 'vuex'
-
+  import ShopDiscount from './ShopDiscount.vue'
   export default {
     data (){
       return {
         shopDiscount: false,
+        transform: false,
       }
     },
     mounted() {
      this.UpdateList();
-      window.addEventListener('scroll', this.pushList)
+     const offsetTop = (this.$refs.poifilterNav.offsetTop||396) - 50;
+      console.log(offsetTop);
+      window.addEventListener('scroll', (e) => {
+        this.pushList
+        const scrollPosition = document.body.scrollTop + document.documentElement.scrollTop;
+        if(scrollPosition >= offsetTop&&!this.transform){
+          this.transform = true;
+        }else if(scrollPosition <= offsetTop&&this.transform){
+          this.transform = false;
+        }
+      })
     },
     methods: {
       ...mapActions({
         UpdateList: 'getList', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
       }),
-      showDiscount (e){
-        console.log(this.shopDiscount);
-        e.preventDefault();
-        e.stopPropagation();
-        this.shopDiscount = !this.shopDiscount;
-      },
+
       pushList(e) {
         const scrollPosition = document.body.scrollTop + document.documentElement.scrollTop;
         const bodyHeight = document.body.scrollHeight - document.documentElement.clientHeight;
-        console.log(scrollPosition, bodyHeight);
         if(scrollPosition + 500 > bodyHeight){
            this.UpdateList();
         }
       }
+    },
+    components: {
+      'v-discount': ShopDiscount,
     },
     computed: {
       ...mapGetters([
@@ -108,10 +99,19 @@
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
   .poifilter-nav {
+    display: block;
+    width: 100%;
     height: 39px;
     border-width: 1px 0;
     position: relative;
-    -webkit-transition: 300ms;
+    transition: 0.3s;
+    background-color: #fff;
+    &.fixed-nav{
+      position: fixed;
+      left: 0;
+      top: 50px;
+      z-index: 10;
+    }
     .nav-right-sep {
       border-right: 1px solid #dddddd;
       text-align: center;
@@ -306,64 +306,7 @@
             }
           }
         }
-        /* 活动 */
-        .shop-discount-entries {
-          max-height: 1rem;
-          font-size: 11px;
-          color: #898989;
-          padding-top: 0.5rem;
-          position: relative;
-          overflow: hidden;
-          transition: .3s;
-          &.shop-discount-entries-show{
-            height: auto;
-            max-height: 5rem;
-            transition: .3s;
-          }
-          .discount-down{
-            display: inline-block;
-            box-sizing: border-box;
-            color: #5f5f5f;
-            font-size: 0.35rem;
-            font-weight: 800;
-            position: absolute;
-            right: 0.5rem;
-            transform: rotate(-90deg);
-            -webkit-transform: rotate(-90deg);
-            -moz-transform: rotate(-90deg);
-            transition: .3s;
-          }
-          .discount-up{
-            transform: rotate(90deg);
-            -webkit-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-          }
-          .shop-discount-entry-wrap-overflow {
-            width: 70%;
-            .shop-discount-entry {
-              margin-bottom: 4px;
-              position: relative;
-              i {
-                vertical-align: -2px;
-                float: left;
-              }
-              .i-x12 {
-                width: 0.38rem;
-                height: 0.38rem;
-                display: block;
-                position: absolute;
-                top: 1px;
-              }
-              .shop-discount-overflow {
-                text-overflow: ellipsis;
-                overflow: hidden;
-                white-space: nowrap;
-                margin-left: 17px;
-                line-height: 17px;
-              }
-            }
-          }
-        }
+
       }
     }
   }
