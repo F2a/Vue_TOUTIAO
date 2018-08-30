@@ -46,6 +46,10 @@
           </a>
         </div>
       </div>
+      <p style="font-size: 0.3rem; line-height: 1rem" >努力加载中...</p>
+    </div>
+    <div class="backtop BackTop-wrapper">
+
     </div>
   </div>
 </template>
@@ -309,5 +313,20 @@
 
       }
     }
+  }
+  .BackTop-wrapper{
+    position: fixed;
+    right: 0.6rem;
+    bottom: 2rem;
+    width: 1rem;
+    height: 1rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #999;
+    border-radius: 50%;
+    background: #fff;
+    transition: opacity .3s;
+    will-change: transform;
+    z-index: 3;
   }
 </style>

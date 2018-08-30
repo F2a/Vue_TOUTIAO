@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <v-header />
     <router-view />
   </div>
 </template>
@@ -8,12 +7,8 @@
 <script>
   import './common/fonts/iconfont.css'
   import './common/style/normalize.css'
-  import header from './components/header/Header.vue'
   export default {
     name: 'App',
-    components: {
-      "v-header": header,
-    },
   };
 </script>
 
