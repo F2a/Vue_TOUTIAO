@@ -1,17 +1,20 @@
 <template>
   <div class="hello">
+    <v-header />
     <v-meatType />
     <div class="shoplist-title">
       <h4>推荐商家</h4>
     </div>
     <v-sellerList />
-    <p style="font-size: 0.3rem; line-height: 1rem" >努力加载中...</p>
+    <v-userBar />
   </div>
 </template>
 
 <script>
   import meatType from '../components/meatTypes/MeatType.vue';
   import sellerList from '../components/sellerList/SellerList.vue';
+  import header from '../components/header/Header.vue';
+  import userBar from '../components/userBar/UserBar.vue';
 
   export default {
     name: 'Home',
@@ -23,6 +26,8 @@
     components: {
       "v-meatType": meatType,
       "v-sellerList": sellerList,
+      "v-header": header,
+      "v-userBar": userBar,
     },
     methods: {
 
