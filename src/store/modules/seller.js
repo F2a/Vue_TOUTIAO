@@ -5,13 +5,14 @@ const seller = {
   state: {
     spanning: true,
     sellerList: [],
+    sellerSyn: {},
     sellerDetail: {},
   },
   actions: {
     async getList ({ commit, state }) {
       if(state.spanning){
         commit('SPANNING');
-        console.log(1222111);
+        console.log('push sellerList');
         const { data } = await api.getSeller();
         console.log(data);
         if(data){
@@ -24,6 +25,10 @@ const seller = {
     },
   },
   mutations: {
+    SELLERSYN (state, data) {
+      console.log(data);
+      state.sellerSyn = data;
+    },
     POSTLIST(state, data){
       state.sellerList = data;
     },
