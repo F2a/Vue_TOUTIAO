@@ -67,6 +67,8 @@ pre {
  */
 
 a {
+  color: #2f2f2f;
+  cursor: pointer;
   background-color: transparent;
   text-decoration: none;
   outline: none;
