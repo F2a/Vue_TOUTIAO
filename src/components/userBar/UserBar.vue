@@ -2,15 +2,15 @@
   <div class="user-bar-wrap">
     <div class="user-bar">
       <a class="user-bar-btn user-bar-btn-focus">
-        <i class="ico-bowl-fill"></i>
+        <i class="iconfont icon-bowl-fill"></i>
         <span class="user-bar-btn-txt">首页</span>
       </a>
       <a class="user-bar-btn" >
-        <i class="ico-paper"></i>
+        <i class="iconfont icon-paper"></i>
         <span class="user-bar-btn-txt">订单</span>
       </a>
       <a class="user-bar-btn" >
-        <i class="ico-user"></i>
+        <i class="iconfont icon-user"></i>
         <span class="user-bar-btn-txt">我的</span>
       </a>
     </div>
@@ -33,12 +33,12 @@
   .user-bar-wrap {
     width: 100%;
     position: fixed;
-    bottom: 0;
+    bottom: -1px;
     .user-bar {
       width: 100%;
-      height: 56px;
-      border-top: 1px solid #b6b6b6;
-      background-color: rgba(246, 246, 246, 0.95);
+      height: 50px;
+      border-top: 1px solid #f0f0f0;
+      background-color: rgba(246, 246, 246);
       text-align: center;
       overflow: hidden;
       z-index: 100;
@@ -49,10 +49,11 @@
         float: left;
         .user-bar-btn-txt {
           display: block;
-          font-size: 11px;
+          font-size: 10px;
         }
         i {
           display: block;
+          font-size: 25px;
           width: 25px;
           height: 25px;
           margin: 5px auto;
