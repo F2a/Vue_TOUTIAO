@@ -1,11 +1,11 @@
 <template>
-  <div class="hello">
+  <div class="home">
     <v-header />
     <v-meatType />
     <div class="shoplist-title">
       <h4>推荐商家</h4>
     </div>
-    <v-sellerList />
+    <v-sellerList :marginTop="50" :marginBottom="50" />
     <v-userBar />
   </div>
 </template>
@@ -74,6 +74,9 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="less" rel="stylesheet/less" scoped>
+  .home{
+    padding-top: 60px;
+  }
   h4{
     font-size: 0.5rem;
   }
