@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="top-sellerList">
     <nav ref="poifilterNav" :class="['poifilter-nav', {'fixed-nav': transform}]">
       <a href="javascript:;" class="nav-item nav-right-sep">选项一</a>
       <a href="javascript:;" class="nav-item nav-right-sep">综合排序</a>
@@ -8,83 +8,94 @@
     <div
       id="poilist"
       class="sellerlist"
-      :style="{ 'margin-top': transform?'50px':'0' }"
+      :style="{ 'padding-top': transform?'50px':'0', 'padding-bottom': (marginBottom||'0') + 'px',  }"
     >
-      <div v-for="item in sellerList" class="field">
+      <div
+        v-for="item in sellerList"
+        @click="toSeller(item)"
+        class="field"
+      >
         <a>
           <div class="avatar">
             <img :src="item.avatar" :data-src-retina="item.avatar" class="j-poi-pic avatar-img">
           </div>
         </a>
         <div class="content">
-          <a>
-            <div class="shop-title shop-title-icon-0">
-              <div class="shop-na">{{ item.name }}</div>
+        <a>
+          <div class="shop-title shop-title-icon-0">
+            <div class="shop-na">{{ item.name }}</div>
+          </div>
+          <div class="shop-mid-line clearfix">
+            <div class="appr-status">
+              <i :class="['appr-score', item.score < 1&&'appr-score-gray' ]"></i>
+              <i :class="['appr-score', item.score < 2&&'appr-score-gray' ]"></i>
+              <i :class="['appr-score', item.score < 3&&'appr-score-gray' ]"></i>
+              <i :class="['appr-score', item.score < 4&&'appr-score-gray' ]"></i>
+              <i :class="['appr-score', item.score < 5&&'appr-score-gray' ]"></i>
             </div>
-            <div class="shop-mid-line clearfix">
-              <div class="appr-status">
-                <i :class="['appr-score', item.score < 1&&'appr-score-gray' ]"></i>
-                <i :class="['appr-score', item.score < 2&&'appr-score-gray' ]"></i>
-                <i :class="['appr-score', item.score < 3&&'appr-score-gray' ]"></i>
-                <i :class="['appr-score', item.score < 4&&'appr-score-gray' ]"></i>
-                <i :class="['appr-score', item.score < 5&&'appr-score-gray' ]"></i>
-              </div>
-              <div class="shop-sold mtsi-num">月售{{ item.sellCount }}</div>
-              <i class="shop-right mtsi-num">{{ item.distance }}km</i>
-              <i class="shop-dvd-line">|</i>
-              <i class="shop-delivery-time mtsi-num">{{ item.deliveryTime }}min</i>
-            </div>
-            <div class="shop-line clearfix">
-              <span class="shop-line-item">起送价
-                <em class="mtsi-num">￥{{ item.minPrice }}</em>
-              </span>
-              <span class="shop-line-item mtsi-num"><span class="shop-line-item-line">|</span>配送 ¥{{ item.serviceScore }}</span>
-              <div v-if="item.delivery" class="allocation-icon"><span>美团专送</span></div>
-              <div class="clear"></div>
-            </div>
-            <v-discount :supports="item.supports" />
-          </a>
+            <div class="shop-sold mtsi-num">月售{{ item.sellCount }}</div>
+            <i class="shop-right mtsi-num">{{ item.distance }}km</i>
+            <i class="shop-dvd-line">|</i>
+            <i class="shop-delivery-time mtsi-num">{{ item.deliveryTime }}min</i>
+          </div>
+          <div class="shop-line clearfix">
+            <span class="shop-line-item">起送价
+              <em class="mtsi-num">￥{{ item.minPrice }}</em>
+            </span>
+            <span class="shop-line-item mtsi-num"><span class="shop-line-item-line">|</span>配送 ¥{{ item.serviceScore }}</span>
+            <div v-if="item.delivery" class="allocation-icon"><span>美团专送</span></div>
+            <div class="clear"></div>
+          </div>
+          <v-discount :supports="item.supports" />
+        </a>
         </div>
       </div>
       <p style="font-size: 0.3rem; line-height: 1rem" >努力加载中...</p>
     </div>
-    <div class="backtop BackTop-wrapper">
-
-    </div>
+    <a @click="backTop" class="BackTop-wrapper" :style="{ 'display': transform?'block':'none'}">
+      <i class="iconfont icon-backTop"></i>
+    </a>
   </div>
 </template>
 <script>
-  import { mapGetters, mapActions } from 'vuex'
+  import { mapGetters, mapActions, mapMutations } from 'vuex'
   import ShopDiscount from './ShopDiscount.vue'
   export default {
     data (){
       return {
         shopDiscount: false,
         transform: false,
+        offsetTop: 396,
       }
     },
+    props: ['marginTop', 'marginBottom'],
     mounted() {
      this.UpdateList();
-     const offsetTop = (this.$refs.poifilterNav.offsetTop||396) - 50;
-      console.log(offsetTop);
-      window.addEventListener('scroll', (e) => {
-        this.pushList
-        const scrollPosition = document.body.scrollTop + document.documentElement.scrollTop;
-        if(scrollPosition >= offsetTop&&!this.transform){
-          this.transform = true;
-        }else if(scrollPosition <= offsetTop&&this.transform){
-          this.transform = false;
-        }
-      })
+      window.addEventListener('scroll', this.pushList);
+      this.offsetTop = (this.$refs.poifilterNav.offsetTop||396) - (this.marginTop||0);
     },
     methods: {
       ...mapActions({
         UpdateList: 'getList', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
       }),
-
+      ...mapMutations({
+        sellerSyn: 'SELLERSYN', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+      }),
+      toSeller(data) {
+        this.$router.push({path: '/seller'});
+        this.sellerSyn(data);
+      },
+      backTop(e) {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+      },
       pushList(e) {
         const scrollPosition = document.body.scrollTop + document.documentElement.scrollTop;
         const bodyHeight = document.body.scrollHeight - document.documentElement.clientHeight;
+        if(scrollPosition >= this.offsetTop&&!this.transform){
+          this.transform = true;
+        }else if(scrollPosition <= this.offsetTop&&this.transform){
+          this.transform = false;
+        }
         if(scrollPosition + 500 > bodyHeight){
            this.UpdateList();
         }
@@ -113,7 +124,7 @@
     &.fixed-nav{
       position: fixed;
       left: 0;
-      top: 50px;
+      top: 49px;
       z-index: 10;
     }
     .nav-right-sep {
@@ -327,6 +338,10 @@
     background: #fff;
     transition: opacity .3s;
     will-change: transform;
-    z-index: 3;
+    z-index: 10;
+    i{
+      margin-top: -0.12rem;
+      vertical-align: middle;
+    }
   }
 </style>

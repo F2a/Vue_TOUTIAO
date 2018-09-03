@@ -1,6 +1,6 @@
 <template>
   <div @click="showDiscount($event)" :class="['clearfix', 'shop-discount-entries', { 'shop-discount-entries-show': shopDiscount }]">
-    <div v-if="num>2" :class="['discount-down', { 'discount-up': shopDiscount }]">&lt;</div>
+    <div v-if="num>2" :class="['discount-down', { 'discount-up': shopDiscount }]"> &lt; </div>
     <ul
       class="shop-discount-entry-wrap-overflow clearfix"
     >
@@ -50,7 +50,8 @@
 <style lang="less" rel="stylesheet/less" scoped>
   /* 活动 */
   .shop-discount-entries {
-    max-height: 1.2rem;
+    width: 100%;
+    max-height: 1.18rem;
     font-size: 11px;
     color: #898989;
     padding-top: 0.5rem;
@@ -65,7 +66,7 @@
     .discount-down{
       display: inline-block;
       box-sizing: border-box;
-      color: #5f5f5f;
+      color: #999;
       font-size: 0.35rem;
       font-weight: 800;
       position: absolute;
@@ -81,7 +82,7 @@
       -moz-transform: rotate(90deg);
     }
     .shop-discount-entry-wrap-overflow {
-      width: 70%;
+      width: 80%;
       .shop-discount-entry {
         margin-bottom: 4px;
         position: relative;
@@ -97,6 +98,8 @@
           top: 1px;
         }
         .shop-discount-overflow {
+          text-align: left;
+          padding-left: 3px;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;

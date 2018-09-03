@@ -12,7 +12,7 @@
           <i class="iconfont icon-arrow-right" />
         </a>
         <a class="search-icon-wrap">
-          <i style="padding: 0 8px" class="iconfont icon-search"></i>
+          <i class="iconfont icon-search"></i>
           <span class="search-text">搜索美团商家、商品名称</span>
         </a>
       </div>
@@ -40,9 +40,9 @@
       window.addEventListener('scroll', (e) => {
         console.log(this.transform);
         const scrollPosition = document.body.scrollTop + document.documentElement.scrollTop;
-        if(scrollPosition > 120&&!this.transform){
+        if(scrollPosition > 30&&!this.transform){
           this.transform = true;
-        }else if(scrollPosition < 120&&this.transform){
+        }else if(scrollPosition < 30&&this.transform){
           this.transform = false;
         }
       })
@@ -108,9 +108,17 @@
       width: 45%;
       background: #fff;
       text-align: left;
+      i{
+        padding: 3px 5px;
+      }
       .search-text {
+        width: 70%;
+        display: inline-block;
         color: #999;
         font-size: 0.25rem;
+        vertical-align: text-bottom;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     }
   }
