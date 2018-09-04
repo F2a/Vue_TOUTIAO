@@ -41,55 +41,175 @@
         </div>
       </div>
     </div>
-    <div class="menuview">
-      <main class="menuview-main">
-        <div class="category">
-          <ul class="categoryWrapper">
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
-            <li class="categoryItem">
-              <i class="icontfont icon-paper"></i>
-              <span>categoryItem</span>
-            </li>
+    <div  style="height: 495px;">
+      <div class="menuview">
+        <main class="menuview-main">
+          <div class="category">
+            <ul class="categoryWrapper">
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categ</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
+              <li class="categoryItem">
+                <i class="iconfont icon-paper"></i>
+                <span>categoryItem</span>
+              </li>
 
-          </ul>
-        </div>
-      </main>
+            </ul>
+          </div>
+          <section class="container menuList">
+            <div class="scroller">
+              <dl role="menu">
+                <dt role="heading" aria-label="必选品
+(下单必点米饭)，">
+                  <div class="category-title">
+                    <strong class="category-name">必选品(下单必点米饭)</strong>
+                    <span class="category-desc"></span>
+                  </div>
+                </dt>
+                <dd aria-label="宝宝不用米饭，现价0元。" role="menuitem" class="">
+                  <div class="fooddetails-root">
+                  <span class="fooddetails-logo">
+                    <img alt="宝宝不用米饭" title="宝宝不用米饭" src="//fuss10.elemecdn.com/5/c6/ef31560390005987ab4b428943b8bjpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/">
+                  </span>
+                    <section class="fooddetails-info">
+                      <p class="fooddetails-name">
+                        <span class="fooddetails-nameText">宝宝不用米饭</span>
+                      </p>
+                      <p class="fooddetails-desc">不需要米饭点这里</p>
+                      <p class="fooddetails-sales"></p>
+                      <div class="fooddetails-activityRow"></div>
+                      <span class="salesInfo-price fooddetails-salesInfo" style="color: rgb(255, 83, 57);">
+                        <span>0</span>
+                      </span>
+                      <div class="fooddetails-button">
+                      <span>
+                        <span class="cartbutton-entitybutton">
+                          <a role="button" aria-label="删减商品">
+                            <i class="iconfont icon-add"/>
+                          </a>
+                          <span role="button" aria-label="已选1份" class="cartbutton-entityquantity">
+                            1
+                          </span>
+                          <a href="javascript:" role="button" aria-label="添加商品">
+                            <i  class="iconfont icon-sub" />
+                          </a>
+                        </span>
+                      </span>
+                    </div>
+                    </section>
+                  </div>
+                </dd>
+              </dl>
+            </div>
+          </section>
+        </main>
+      </div>
     </div>
+    <footer class="cartview-cartview">
+      <div class="cartview-cartmask" style="z-index: 10; display: none;"></div>
+      <div class="cartview-cartbody cartview-cartbodyOpen" style="z-index: 11;">
+        <section class="discount-tip-discountTip">
+          <span style="color: #333333;">还差</span>
+          <span style="color: #FF5339;">14</span>
+          <span style="color: #333333;">元起送</span>
+        </section>
+        <div style="opacity: 1;">
+          <div class="cartview-cartheader">
+            <div class="cartview-headerText">
+              <span>已选商品</span>
+            </div>
+            <a class="cartview-cartheaderRemove">
+              <i></i>
+              <span>清空</span>
+            </a>
+          </div>
+          <div class="entityList-cartbodyScroller">
+            <ul class="entityList-cartlist">
+              <li class="entityList-entityrow">
+                <span class="entityList-entityname">
+                  <em class="entityList-name">香肠</em>
+                  <p class="entityList-entityspecs"> </p>
+                </span>
+                <span class="entityList-entitytotal" style="color: rgb(255, 83, 57);">
+                  <span class="entityList-entitytotalDiscount">￥2</span>
+                </span>
+                <span class="entityList-entitycartbutton">
+                  <div class="fooddetails-button">
+                        <span>
+                          <span class="cartbutton-entitybutton">
+                            <a role="button" aria-label="删减商品">
+                              <i class="iconfont icon-add"/>
+                            </a>
+                            <span role="button" aria-label="已选1份" class="cartbutton-entityquantity">
+                              1
+                            </span>
+                            <a href="javascript:" role="button" aria-label="添加商品">
+                              <i  class="iconfont icon-sub" />
+                            </a>
+                          </span>
+                        </span>
+                      </div>
+                </span>
+              </li>
+            </ul>
+            <div class="entityList-entityrow entityList-packingfee">
+              <span class="entityList-entityname">餐盒</span>
+              <span class="entityList-entitytotal" style="color: rgb(255, 83, 57);">￥2</span>
+              <span class="entityList-entitycartbutton"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottomNav-cartfooter" style="z-index: 11;">
+        <span class="bottomNav-carticon">
+          <i class="iconfont icon-gouwuche" />
+          <span>2</span>
+        </span>
+        <div role="button" aria-label="购物车有商品2件，共6元，另需配送费1.6元。" class="bottomNav-cartInfo">
+          <p class="bottomNav-carttotal">
+            <span class="">¥6</span>
+          </p>
+          <p class="bottomNav-cartdelivery">另需配送费1.6元</p>
+        </div>
+        <a role="button" class="submit-btn-submitbutton submit-btn-disabled submit-btn-multiLine">
+          <small>下单前请点必选品</small>
+          <small>还差¥14起送</small>
+        </a>
+      </div>
+    </footer>
   </div>
 </template>
 <script>
@@ -250,6 +370,7 @@
           z-index: 0;
           .categoryItem {
             position: relative;
+            line-height: 16px;
             padding: .466667rem .2rem;
             font-size: .32rem;
             color: #666;
@@ -257,7 +378,7 @@
               color: #333;
               background-color: #fff;
             }
-            .icon {
+            .iconfont {
               width: .346667rem;
               height: .346667rem;
               vertical-align: top;
@@ -280,7 +401,7 @@
             margin: 0;
             dt {
               position: relative;
-              margin-left: .26rem;
+              margin: .2rem 0 0 .26rem;
               padding: .2rem .8rem .2rem 0;
               .category-title {
                 display: flex;
@@ -309,7 +430,7 @@
               margin: 0;
               min-height: 3.066667rem;
               padding-left: .266667rem;
-              .fooddetails {
+              .fooddetails-root {
                 padding: .266667rem 0;
                 margin-bottom: .013333rem;
                 display: flex;
@@ -325,64 +446,61 @@
                     width: 100%;
                     border-radius: .053333rem;
                   }
-                  .fooddetails-info {
-                    -webkit-flex: 1;
-                    flex: 1;
+                }
+                .fooddetails-info {
+                  -webkit-flex: 1;
+                  flex: 1;
+                  position: relative;
+                  padding-bottom: .666667rem;
+                  padding-right: .4rem;
+                  .fooddetails-name {
                     position: relative;
-                    padding-bottom: .666667rem;
                     padding-right: .4rem;
-                    .fooddetails-name {
-                      position: relative;
-                      padding-right: .4rem;
-                      display: -webkit-flex;
-                      display: flex;
-                      align-items: start;
-                      span {
-                        font-weight: 700;
-                        overflow: hidden;
-                        font-size: .4rem;
-                        white-space: nowrap;
-                        width: 4rem;
-                        text-overflow: ellipsis;
-                      }
-                    }
-                    .fooddetails-desc {
-                      margin: .133333rem 0;
-                      font-size: .266667rem;
-                      color: #999;
+                    display: -webkit-flex;
+                    display: flex;
+                    align-items: start;
+                    text-align: left;
+                    span {
+                      font-weight: 700;
                       overflow: hidden;
-                      text-overflow: ellipsis;
+                      font-size: .4rem;
                       white-space: nowrap;
-                      width: 4.266667rem;
+                      width: 4rem;
+                      text-overflow: ellipsis;
                     }
-                    .salesInfo-price {
-                      position: absolute;
-                      bottom: 0;
-                      font-size: .48rem;
-                      line-height: .426667rem;
-                      color: #ff5339;
-                      padding-bottom: .093333rem;
-                      display: -webkit-flex;
-                      display: flex;
-                      -webkit-align-items: baseline;
-                      align-items: baseline;
-                      &:before {
-                        content: "\A5";
-                        font-size: .373333rem;
-                        display: inline-block;
-                        margin-right: .266667vw;
-                      }
+                  }
+                  .fooddetails-desc {
+                    margin: .133333rem 0;
+                    font-size: .266667rem;
+                    text-align: left;
+                    color: #999;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    width: 4.266667rem;
+                  }
+                  .salesInfo-price {
+                    position: absolute;
+                    bottom: 0;
+                    font-size: .48rem;
+                    line-height: .426667rem;
+                    color: #ff5339;
+                    padding-bottom: .093333rem;
+                    display: -webkit-flex;
+                    display: flex;
+                    -webkit-align-items: baseline;
+                    align-items: baseline;
+                    &:before {
+                      content: "\A5";
+                      font-size: .373333rem;
+                      display: inline-block;
+                      margin-right: .266667vw;
                     }
-                    .fooddetails-button {
-                      position: absolute;
-                      right: .4rem;
-                      bottom: .066667rem;
-                      .cartbutton-entitybutton {
-                        display: inline-flex;
-                        font-size: .346667rem;
-                        align-items: center;
-                      }
-                    }
+                  }
+                  .fooddetails-button {
+                    position: absolute;
+                    right: .4rem;
+                    bottom: .066667rem;
                   }
                 }
               }
@@ -392,4 +510,218 @@
       }
     }
   }
+  footer {
+    font-size: .42rem;
+    /* 购物车列表 */
+    .cartview-cartbody {
+      position: fixed;
+      z-index: 11;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #fff;
+      transition: transform .3s ease;
+      transform: translate3d(0,100%,0);
+      &.cartview-cartbodyOpen {
+        transform: translateZ(0);
+        bottom: 1.28rem;
+      }
+      .discount-tip-discountTip {
+        background-color: #fffad6;
+        border-top: 1px solid #f9e8a3;
+        opacity: .96;
+        line-height: .5rem;
+        font-size: .26rem;
+        text-align: center;
+      }
+      .cartview-headerText {
+        display: flex;
+        align-items: center;
+
+        flex: 1;
+      }
+      .cartview-cartheader {
+        display: flex;
+        align-items: center;
+        padding: 0 .4rem;
+        border-bottom: .013333rem solid #ddd;
+        background-color: #eceff1;
+        color: #666;
+        height: 1.06rem;
+        .cartview-cartheaderRemove {
+          flex: none;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-align-items: center;
+          align-items: center;
+          padding-left: .4rem;
+          color: #666;
+          text-decoration: none;
+          font-size: .35rem;
+          line-height: .4rem;
+        }
+      }
+      .entityList-cartbodyScroller {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 8rem;
+        ul {
+          flex: none;
+        }
+        .entityList-entityrow {
+          display: flex;
+          align-items: center;
+          padding: .2rem .3rem .2rem 0;
+          min-height: 1.5rem;
+          margin-left: .3rem;
+          &.entityList-packingfee {
+            border-top: .13vw solid #eee;
+          }
+          &:not(:last-child) {
+            border-bottom: 1px solid #eee;
+          }
+          .entityList-entityname {
+            flex: 5.5;
+            line-height: normal;
+            text-align: left;
+            .entityList-name {
+              display: inline-block;
+              font-style: normal;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              vertical-align: middle;
+              max-width: 4.66rem;
+            }
+            .entityList-entityspecs {
+              width: 100%;
+              line-height: .3rem;
+              color: #999;
+              font-size: .27rem;
+            }
+          }
+          .entityList-entitytotal {
+            flex: 2.5;
+            color: #ff5339;
+            text-align: right;
+            white-space: nowrap;
+            font-weight: 700;
+          }
+          .entityList-entitycartbutton {
+            flex: 3;
+            text-align: right;
+          }
+        }
+      }
+    }
+    /* 购物车底部 */
+    .bottomNav-cartfooter {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: -webkit-flex;
+      display: flex;
+      align-items: center;
+      padding-left: 2.1rem;
+      background-color: rgba(61,61,63,.9);
+      height: 1.28rem;
+      .bottomNav-carticon {
+        position: absolute;
+        left: .32rem;
+        bottom: .2rem;
+        width: 1.3rem;
+        height: 1.3rem;
+        box-sizing: border-box;
+        border-radius: 100%;
+        background-color: #3190e8;
+        border: .13rem solid #444;
+        box-shadow: 0 -0.08rem 0.053333rem 0 rgba(0,0,0,.1);
+        will-change: transform;
+        .iconfont{
+          font-size: .6rem;
+          color: #fff;
+          padding-top: .2rem;
+        }
+        span {
+          position: absolute;
+          right: -.12rem;
+          top: -.133333rem;
+          line-height: 1;
+          background-image: linear-gradient(-90deg,#ff7416,#ff3c15 98%);
+          color: #fff;
+          border-radius: .32rem;
+          padding: .053333rem .133333rem;
+          font-size: .266667rem;
+        }
+      }
+      .bottomNav-cartInfo {
+        flex: 1;
+        text-align: left;
+        .bottomNav-carttotal {
+          font-size: .48rem;
+          line-height: normal;
+          color: #fff;
+          .bottomNav-carttotalOriginal {
+            font-size: .7em;
+            color: #999;
+          }
+        }
+        .bottomNav-cartdelivery {
+          color: #999;
+          font-size: .26rem;
+        }
+      }
+      .submit-btn-submitbutton {
+        height: 100%;
+        width: 2.8rem;
+        background-color: #38ca73;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        font-size: .4rem;
+        font-weight: 700;
+        -webkit-user-select: none;
+        user-select: none;
+        line-height: 1.28rem;
+        &.submit-btn-multiLine {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          line-height: 1.3;
+        }
+        &.submit-btn-disabled {
+          background-color: #666666;
+        }
+      }
+    }
+
+  }
+  /* 商品加减按钮 */
+  .cartbutton-entitybutton {
+    display: inline-flex;
+    font-size: .346667rem;
+    align-items: center;
+    .cartbutton-entityquantity {
+      display: inline-block;
+      text-align: center;
+      color: rgba(0,0,0,.87);
+      vertical-align: middle;
+      font-size: .373333rem;
+      width: .693333rem;
+      overflow: hidden;
+    }
+    a {
+      display: inline-block;
+      vertical-align: middle;
+      text-decoration: none;
+      margin: 0 3px;
+    }
+    i {
+      color: rgb(35, 149, 255);
+      font-size: 23px;
+      vertical-align: middle;
+    }
+  }
+
 </style>
