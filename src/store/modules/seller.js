@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import * as  api from '../../common/service';
 
 const seller = {
@@ -6,7 +5,7 @@ const seller = {
     spanning: true,
     sellerList: [],
     sellerSyn: {},
-    sellerDetail: {},
+    goods: {},
   },
   actions: {
     async getList ({ commit, state }) {
@@ -23,6 +22,13 @@ const seller = {
         }
       }
     },
+    async getGoods ({ commit }) {
+      console.log('getGoods');
+      const { data } = await api.getGoods();
+      if(data){
+        commit('POSTGOODS', data.list);
+      }
+    }
   },
   mutations: {
     SELLERSYN (state, data) {
@@ -31,6 +37,9 @@ const seller = {
     },
     POSTLIST(state, data){
       state.sellerList = data;
+    },
+    POSTGOODS(state, data){
+      state.goods = data;
     },
     SPANNING(state){
       state.spanning = !state.spanning;
