@@ -139,14 +139,14 @@
       </div>
     </div>
     <footer class="cartview-cartview">
-      <div class="cartview-cartmask" style="z-index: 10; display: none;"></div>
-      <div class="cartview-cartbody cartview-cartbodyOpen" style="z-index: 11;">
+      <div @click="changeStatus" ref="mask" class="cartview-cartmask" />
+      <div :class="['cartview-cartbody', {'cartview-cartbodyOpen': cartStatus}]" style="z-index: 11;">
         <section class="discount-tip-discountTip">
           <span style="color: #333333;">还差</span>
           <span style="color: #FF5339;">14</span>
           <span style="color: #333333;">元起送</span>
         </section>
-        <div style="opacity: 1;">
+        <div :style="{ opacity: cartStatus?'1':'0' }">
           <div class="cartview-cartheader">
             <div class="cartview-headerText">
               <span>已选商品</span>
@@ -194,7 +194,7 @@
         </div>
       </div>
       <div class="bottomNav-cartfooter" style="z-index: 11;">
-        <span class="bottomNav-carticon">
+        <span @click="changeStatus" class="bottomNav-carticon">
           <i class="iconfont icon-gouwuche" />
           <span>2</span>
         </span>
@@ -220,6 +220,7 @@
     name: 'Seller',
     data () {
       return {
+        cartStatus: false,
         title: 'Seller',
       }
     },
@@ -227,7 +228,21 @@
 
     },
     methods: {
-
+      changeStatus() {
+        this.cartStatus = !this.cartStatus;
+        const mask = this.$refs.mask;
+        if(this.cartStatus){
+          mask.style.display = 'block';
+          window.setTimeout(() => {
+            mask.style.opacity = '0.4';
+          },50)
+        }else{
+          mask.style.opacity = '0';
+          window.setTimeout(() => {
+            mask.style.display = 'none';
+          },300)
+        }
+      }
     },
     computed: {
       ...mapGetters([
@@ -513,10 +528,21 @@
   footer {
     font-size: .42rem;
     /* 购物车列表 */
+    .cartview-cartmask {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: #000;
+      opacity: .4;
+      transition: opacity .3s ease;
+    }
     .cartview-cartbody {
       position: fixed;
       z-index: 11;
-      bottom: 0;
+      bottom: 1.8rem;
       left: 0;
       width: 100%;
       background-color: #fff;
