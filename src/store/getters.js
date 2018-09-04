@@ -1,7 +1,7 @@
 const getters = {
   /*seller*/
   sellerList: state => state.seller.sellerList,
-  sellerDetail: state => state.seller.sellerDetail,
+  goods: state => state.seller.goods,
   sellerSyn: state => state.seller.sellerSyn,
 
 }
