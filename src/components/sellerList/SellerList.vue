@@ -70,7 +70,7 @@
     },
     props: ['marginTop', 'marginBottom'],
     mounted() {
-     this.UpdateList();
+      this.UpdateList();
       window.addEventListener('scroll', this.pushList);
       this.offsetTop = (this.$refs.poifilterNav.offsetTop||396) - (this.marginTop||0);
     },
