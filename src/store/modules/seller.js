@@ -4,8 +4,8 @@ const seller = {
   state: {
     spanning: true,
     sellerList: [],
-    sellerSyn: {},
-    goods: {},
+    sellerSyn: JSON.parse(localStorage.getItem("sellerSyn")),
+    goods: [],
   },
   actions: {
     async getList ({ commit, state }) {
@@ -13,7 +13,6 @@ const seller = {
         commit('SPANNING');
         console.log('push sellerList');
         const { data } = await api.getSeller();
-        console.log(data);
         if(data){
           const { list } = data.data;
           state.sellerList.push(...list);
@@ -26,7 +25,8 @@ const seller = {
       console.log('getGoods');
       const { data } = await api.getGoods();
       if(data){
-        commit('POSTGOODS', data.list);
+        const { list } = data.data;
+        commit('POSTGOODS', list);
       }
     }
   },
@@ -34,6 +34,8 @@ const seller = {
     SELLERSYN (state, data) {
       console.log(data);
       state.sellerSyn = data;
+      const sellerSyn = JSON.stringify(data);
+      localStorage.setItem("sellerSyn", sellerSyn);
     },
     POSTLIST(state, data){
       state.sellerList = data;
