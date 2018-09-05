@@ -2,28 +2,28 @@
   <div>
     <div class="seller-top">
       <div class="seller-title">
-        <nav class="seller-banner" style="background-image: url(&quot;//fuss10.elemecdn.com/a/59/cb76724cd560f895fe9b9ef1f28b5png.png?imageMogr/format/webp/thumbnail/750x/&quot;);">
+        <nav class="seller-banner" :style="{ 'background-image': 'url(&quot;'+sellerSyn.avatar+'&quot;)'}">
           <a class="index--iRT3"></a>
         </nav>
         <div class="seller-syn">
           <div class="seller-logo">
-            <img class="logo" src="//fuss10.elemecdn.com/a/51/11ccdda5a40ad9a28b7c5751d169fpng.png?imageMogr/format/webp/thumbnail/150x/">
+            <img class="logo" :src="sellerSyn.pics" :data-src-retina="sellerSyn.pics">
           </div>
           <div class="name">
             <h2>
-              <span>正宗浏阳蒸菜馆(九芝堂店)</span>
+              <span>{{ sellerSyn.name }}</span>
               <i class="iconfont icon-arrow-right" />
             </h2>
             <div class="takeaway">
-              <span>评价4.4</span>
-              <span>月售4414单</span>
-              <span>蜂鸟快送<span>约27分钟</span></span>
+              <span>评价{{ sellerSyn.score }}</span>
+              <span>月售{{ sellerSyn.sellCount }}单</span>
+              <span>蜂鸟快送<span>约{{ sellerSyn.deliveryTime }}分钟</span></span>
             </div>
           </div>
           <div class="discount">
             <v-discount :supports="sellerSyn.supports" />
           </div>
-          <p class="annou">公告：蒸食膳 真食尚 好料耗材好品质~</p>
+          <p class="annou">公告：{{ sellerSyn.bulletin }}</p>
         </div>
       </div>
     </div>
@@ -31,62 +31,35 @@
       <div class="shop-tab-1MgBk">
         <div class="shop-tab-2ipt1 shop-tab-nD6jp">
           <p class="shop-tab-2H0qT">
-           点餐<span class="shop-tab-1GaSq" style="background-color: rgb(35, 149, 255);"></span>
+            点餐<span class="shop-tab-1GaSq" style="background-color: rgb(35, 149, 255);"></span>
           </p>
         </div>
         <div class="shop-tab-2ipt1">
           <p class="shop-tab-2H0qT">
-           评价<span class="shop-tab-1GaSq" style="background-color: rgb(35, 149, 255);"></span>
+            评价<span class="shop-tab-1GaSq" style="background-color: rgb(35, 149, 255);"></span>
           </p>
         </div>
       </div>
     </div>
+
     <div  style="height: 495px;">
       <div class="menuview">
         <main class="menuview-main">
           <div class="category">
             <ul class="categoryWrapper">
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categ</span>
+              <li class="categoryItem" v-for="item in goods">
+                <i :class="['iconfont',
+                      item.type==0?'icon-zhekou':
+                      item.type==1?'icon-manjian':
+                      item.type==3?'icon-chaocaishouru':
+                      item.type==5?'icon-youhuijuan':
+                      item.type==6?'icon-tianpin':
+                      item.type==9?'icon-manjian':'hidden' ]"
+                />
+                <span>
+                  {{ item.name }}
+                </span>
               </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-              <li class="categoryItem">
-                <i class="iconfont icon-paper"></i>
-                <span>categoryItem</span>
-              </li>
-
             </ul>
           </div>
           <section class="container menuList">
@@ -94,10 +67,10 @@
               <dl role="menu">
                 <dt role="heading" aria-label="必选品
 (下单必点米饭)，">
-                  <div class="category-title">
-                    <strong class="category-name">必选品(下单必点米饭)</strong>
-                    <span class="category-desc"></span>
-                  </div>
+                <div class="category-title">
+                  <strong class="category-name">必选品(下单必点米饭)</strong>
+                  <span class="category-desc"></span>
+                </div>
                 </dt>
                 <dd aria-label="宝宝不用米饭，现价0元。" role="menuitem" class="">
                   <div class="fooddetails-root">
@@ -128,7 +101,7 @@
                           </a>
                         </span>
                       </span>
-                    </div>
+                      </div>
                     </section>
                   </div>
                 </dd>
@@ -225,9 +198,12 @@
       }
     },
     mounted() {
-
+      this.getGoods();
     },
     methods: {
+      ...mapActions({
+        getGoods: 'getGoods', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+      }),
       changeStatus() {
         this.cartStatus = !this.cartStatus;
         const mask = this.$refs.mask;
@@ -244,11 +220,12 @@
         }
       }
     },
+
     computed: {
       ...mapGetters([
         'spanning',
-        'sellerList',
         'sellerSyn',
+        'goods',
       ])
     },
     components: {
@@ -386,7 +363,7 @@
           .categoryItem {
             position: relative;
             line-height: 16px;
-            padding: .466667rem .2rem;
+            padding: .46rem .2rem;
             font-size: .32rem;
             color: #666;
             &.active {
@@ -394,8 +371,8 @@
               background-color: #fff;
             }
             .iconfont {
-              width: .346667rem;
-              height: .346667rem;
+              width: .35rem;
+              height: .35rem;
               vertical-align: top;
               margin-right: .08rem;
             }
@@ -529,6 +506,7 @@
     font-size: .42rem;
     /* 购物车列表 */
     .cartview-cartmask {
+      display: none;
       position: fixed;
       z-index: 10;
       top: 0;
