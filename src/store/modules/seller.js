@@ -6,6 +6,11 @@ const seller = {
     sellerList: [],
     sellerSyn: JSON.parse(localStorage.getItem("sellerSyn")),
     goods: [],
+    cart: {
+      sum: 0,
+      box: 0,
+      goods: [],
+    },
   },
   actions: {
     async getList ({ commit, state }) {
@@ -41,7 +46,24 @@ const seller = {
       state.sellerList = data;
     },
     POSTGOODS(state, data){
+      const cart = {
+        sum: 0,
+        box: 0,
+        goods: [],
+      };
+      data.map((val, index) => {
+        val.foods.map((value, i) => {
+          if(value.num>0){
+            cart.box +=  value.num*0.5;
+            cart.sum += value.num*value.price;
+            value.index = index;
+            value.i = i;
+            cart.goods.push(value);
+          }
+        })
+      })
       state.goods = data;
+      state.cart = cart;
     },
     SPANNING(state){
       state.spanning = !state.spanning;
