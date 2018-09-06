@@ -47,7 +47,7 @@
         <main class="menuview-main">
           <div class="category">
             <ul class="categoryWrapper">
-              <li class="categoryItem" v-for="item in goods">
+              <li class="categoryItem" v-for="item in goods"  @click="goodsScroll(item.type)">
                 <i :class="['iconfont',
                       item.type==0?'icon-zhekou':
                       item.type==1?'icon-manjian':
@@ -55,56 +55,55 @@
                       item.type==5?'icon-youhuijuan':
                       item.type==6?'icon-tianpin':
                       item.type==9?'icon-manjian':'hidden' ]"
-                />
-                <span>
-                  {{ item.name }}
-                </span>
+                /><span :style="{ width: item.type!=2&&item.type!=4&&item.type!=7&&item.type!=8?'75%':'100%' }">{{ item.name }}</span>
               </li>
             </ul>
           </div>
           <section class="container menuList">
             <div class="scroller">
               <dl role="menu">
-                <dt role="heading" aria-label="必选品
-(下单必点米饭)，">
-                <div class="category-title">
-                  <strong class="category-name">必选品(下单必点米饭)</strong>
-                  <span class="category-desc"></span>
-                </div>
-                </dt>
-                <dd aria-label="宝宝不用米饭，现价0元。" role="menuitem" class="">
-                  <div class="fooddetails-root">
-                  <span class="fooddetails-logo">
-                    <img alt="宝宝不用米饭" title="宝宝不用米饭" src="//fuss10.elemecdn.com/5/c6/ef31560390005987ab4b428943b8bjpeg.jpeg?imageMogr/format/webp/thumbnail/!140x140r/gravity/Center/crop/140x140/">
-                  </span>
-                    <section class="fooddetails-info">
-                      <p class="fooddetails-name">
-                        <span class="fooddetails-nameText">宝宝不用米饭</span>
-                      </p>
-                      <p class="fooddetails-desc">不需要米饭点这里</p>
-                      <p class="fooddetails-sales"></p>
-                      <div class="fooddetails-activityRow"></div>
-                      <span class="salesInfo-price fooddetails-salesInfo" style="color: rgb(255, 83, 57);">
-                        <span>0</span>
+                <div v-for="(item, index) in goods">
+                  <dt :id="'category' + item.type" role="heading" :aria-label="item.name" >
+                    <div class="category-title">
+                      <strong class="category-name">{{ item.name }}</strong>
+                      <span class="category-desc"></span>
+                    </div>
+                  </dt>
+                  <dd v-for="(val, i) in item.foods">
+                    <div class="fooddetails-root">
+                      <span class="fooddetails-logo">
+                        <img :alt="val.name" :title="val.name" :src="val.image">
                       </span>
-                      <div class="fooddetails-button">
+                      <section class="fooddetails-info">
+                        <p class="fooddetails-name">
+                          <span class="fooddetails-nameText">{{ val.name }}</span>
+                        </p>
+                        <p class="fooddetails-desc">{{ val.description }}</p>
+                        <p class="fooddetails-sales"></p>
+                        <div class="fooddetails-activityRow"></div>
+                        <span class="salesInfo-price fooddetails-salesInfo" style="color: rgb(255, 83, 57);">
+                        <span>{{ val.price }}</span>
+                        <del class="salesInfo-originPrice">¥{{ val.oldPrice }}</del>
+                      </span>
+                        <div class="fooddetails-button">
                       <span>
                         <span class="cartbutton-entitybutton">
-                          <a role="button" aria-label="删减商品">
-                            <i class="iconfont icon-add"/>
-                          </a>
-                          <span role="button" aria-label="已选1份" class="cartbutton-entityquantity">
-                            1
-                          </span>
-                          <a href="javascript:" role="button" aria-label="添加商品">
+                          <a v-if="val.num" role="button" aria-label="添加商品" @click="changeNum(index, i, 'sub')">
                             <i  class="iconfont icon-sub" />
+                          </a>
+                          <span v-if="val.num" role="button" class="cartbutton-entityquantity">
+                            {{ val.num||0 }}
+                          </span>
+                          <a role="button" aria-label="删减商品" @click="changeNum(index, i, 'add')">
+                            <i class="iconfont icon-add"/>
                           </a>
                         </span>
                       </span>
-                      </div>
-                    </section>
-                  </div>
-                </dd>
+                        </div>
+                      </section>
+                    </div>
+                  </dd>
+                </div>
               </dl>
             </div>
           </section>
@@ -115,9 +114,14 @@
       <div @click="changeStatus" ref="mask" class="cartview-cartmask" />
       <div :class="['cartview-cartbody', {'cartview-cartbodyOpen': cartStatus}]" style="z-index: 11;">
         <section class="discount-tip-discountTip">
-          <span style="color: #333333;">还差</span>
-          <span style="color: #FF5339;">14</span>
-          <span style="color: #333333;">元起送</span>
+          <span v-if="(sellerSyn.deliveryPrice - cart.sum)>0">
+            <span style="color: #333333;">还差</span>
+            <span style="color: #FF5339;">¥{{ sellerSyn.deliveryPrice - cart.sum }}</span>
+            <span style="color: #333333;">元起送</span>
+          </span>
+          <span v-else class="annou" style="color: #333333;">
+            {{ sellerSyn.bulletin }}
+          </span>
         </section>
         <div :style="{ opacity: cartStatus?'1':'0' }">
           <div class="cartview-cartheader">
@@ -131,26 +135,26 @@
           </div>
           <div class="entityList-cartbodyScroller">
             <ul class="entityList-cartlist">
-              <li class="entityList-entityrow">
+              <li v-for="item in cart.goods" class="entityList-entityrow">
                 <span class="entityList-entityname">
-                  <em class="entityList-name">香肠</em>
+                  <em class="entityList-name">{{ item.name }}</em>
                   <p class="entityList-entityspecs"> </p>
                 </span>
                 <span class="entityList-entitytotal" style="color: rgb(255, 83, 57);">
-                  <span class="entityList-entitytotalDiscount">￥2</span>
+                  <span class="entityList-entitytotalDiscount">￥{{ item.price * item.num }}</span>
                 </span>
                 <span class="entityList-entitycartbutton">
                   <div class="fooddetails-button">
                         <span>
                           <span class="cartbutton-entitybutton">
-                            <a role="button" aria-label="删减商品">
-                              <i class="iconfont icon-add"/>
-                            </a>
-                            <span role="button" aria-label="已选1份" class="cartbutton-entityquantity">
-                              1
-                            </span>
-                            <a href="javascript:" role="button" aria-label="添加商品">
+                             <a href="javascript:" role="button" aria-label="添加商品" @click="changeNum(item.index, item.i, 'sub')">
                               <i  class="iconfont icon-sub" />
+                            </a>
+                            <span role="button" class="cartbutton-entityquantity">
+                              {{ item.num }}
+                            </span>
+                             <a role="button" aria-label="删减商品" @click="changeNum(item.index, item.i, 'add')">
+                              <i class="iconfont icon-add"/>
                             </a>
                           </span>
                         </span>
@@ -160,7 +164,7 @@
             </ul>
             <div class="entityList-entityrow entityList-packingfee">
               <span class="entityList-entityname">餐盒</span>
-              <span class="entityList-entitytotal" style="color: rgb(255, 83, 57);">￥2</span>
+              <span class="entityList-entitytotal" style="color: rgb(255, 83, 57);">￥{{ cart.box }}</span>
               <span class="entityList-entitycartbutton"></span>
             </div>
           </div>
@@ -169,17 +173,17 @@
       <div class="bottomNav-cartfooter" style="z-index: 11;">
         <span @click="changeStatus" class="bottomNav-carticon">
           <i class="iconfont icon-gouwuche" />
-          <span>2</span>
+          <span v-if="cart.goods.length">{{ cart.goods.length }}</span>
         </span>
         <div role="button" aria-label="购物车有商品2件，共6元，另需配送费1.6元。" class="bottomNav-cartInfo">
           <p class="bottomNav-carttotal">
-            <span class="">¥6</span>
+            <span class="">¥{{ cart.sum + cart.box }}</span>
           </p>
-          <p class="bottomNav-cartdelivery">另需配送费1.6元</p>
+          <p class="bottomNav-cartdelivery">另需配送费{{ sellerSyn.serviceScore }}元</p>
         </div>
-        <a role="button" class="submit-btn-submitbutton submit-btn-disabled submit-btn-multiLine">
-          <small>下单前请点必选品</small>
-          <small>还差¥14起送</small>
+        <a role="button" :class="['submit-btn-submitbutton', {'submit-btn-disabled': (sellerSyn.deliveryPrice - cart.sum)>0 }, 'submit-btn-multiLine']">
+          <small v-if="(sellerSyn.deliveryPrice - cart.sum)>0">还差¥{{ sellerSyn.deliveryPrice - cart.sum }}起送</small>
+          <span v-else>去结算</span>
         </a>
       </div>
     </footer>
@@ -202,8 +206,24 @@
     },
     methods: {
       ...mapActions({
-        getGoods: 'getGoods', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+        getGoods: 'getGoods',
       }),
+      ...mapMutations({
+        postGoods: 'POSTGOODS',
+      }),
+      changeNum(index, i, action) { //商品增减
+        console.log(action);
+        const data = this.goods;
+        if(action=='add'){
+          data[index].foods[i].num++;
+        }else if(action=='sub'&&data[index].foods[i].num>0){
+          data[index].foods[i].num--;
+        }
+        this.postGoods(data);
+      },
+      goodsScroll(type) { // 索引滚动
+        document.querySelector("#category" + type).scrollIntoView(true);
+      },
       changeStatus() {
         this.cartStatus = !this.cartStatus;
         const mask = this.$refs.mask;
@@ -226,6 +246,7 @@
         'spanning',
         'sellerSyn',
         'goods',
+        'cart',
       ])
     },
     components: {
@@ -343,7 +364,7 @@
   }
   .menuview{
     height: 100%;
-    padding-bottom: 1.28rem;
+    padding-bottom: 1.62rem;
     background-color: #fff;
     .menuview-main {
       display: flex;
@@ -362,17 +383,23 @@
           z-index: 0;
           .categoryItem {
             position: relative;
-            line-height: 16px;
-            padding: .46rem .2rem;
-            font-size: .32rem;
             color: #666;
+            line-height: 16px;
+            font-size: .32rem;
+            text-align: left;
+            padding: .46rem .2rem;
+            span {
+              display: inline-block;
+              width: 75%;
+            }
             &.active {
               color: #333;
               background-color: #fff;
             }
             .iconfont {
-              width: .35rem;
+              width: 20%;
               height: .35rem;
+              font-size: 14px;
               vertical-align: top;
               margin-right: .08rem;
             }
@@ -388,13 +415,14 @@
           height: 100%;
           padding-bottom: 1rem;
           overflow-y: auto;
+          scroll-behavior: smooth; /* 平滑滚动 */
           -webkit-overflow-scrolling: touch;
           dl{
             margin: 0;
             dt {
               position: relative;
-              margin: .2rem 0 0 .26rem;
-              padding: .2rem .8rem .2rem 0;
+              margin-left: .26rem;
+              padding: .4rem .8rem .2rem 0;
               .category-title {
                 display: flex;
                 align-items: center;
@@ -471,6 +499,11 @@
                     white-space: nowrap;
                     width: 4.266667rem;
                   }
+                  .salesInfo-originPrice {
+                    font-size: .32rem;
+                    color: #999;
+                    margin-left: .16rem;
+                  }
                   .salesInfo-price {
                     position: absolute;
                     bottom: 0;
@@ -537,6 +570,15 @@
         line-height: .5rem;
         font-size: .26rem;
         text-align: center;
+        .annou{
+          box-sizing: border-box;
+          display: inline-block;
+          width: 100%;
+          padding: 0 .5rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
       .cartview-headerText {
         display: flex;
