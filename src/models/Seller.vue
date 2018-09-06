@@ -9,15 +9,16 @@
           <div class="seller-logo">
             <img class="logo" :src="sellerSyn.pics" :data-src-retina="sellerSyn.pics">
           </div>
+          <v-modal ref="modal" />
           <div class="name">
-            <h2>
+            <h2 @click="showSyn">
               <span>{{ sellerSyn.name }}</span>
               <i class="iconfont icon-arrow-right" />
             </h2>
             <div class="takeaway">
               <span>评价{{ sellerSyn.score }}</span>
               <span>月售{{ sellerSyn.sellCount }}单</span>
-              <span>蜂鸟快送<span>约{{ sellerSyn.deliveryTime }}分钟</span></span>
+              <span>美团专送<span>约{{ sellerSyn.deliveryTime }}分钟</span></span>
             </div>
           </div>
           <div class="discount">
@@ -171,7 +172,7 @@
         </div>
       </div>
       <div class="bottomNav-cartfooter" style="z-index: 11;">
-        <span @click="changeStatus" class="bottomNav-carticon">
+        <span @click="changeStatus" :class="['bottomNav-carticon', {'bottomNav-empty': cart.goods.length==0}]">
           <i class="iconfont icon-gouwuche" />
           <span v-if="cart.goods.length">{{ cart.goods.length }}</span>
         </span>
@@ -192,6 +193,7 @@
 <script>
   import { mapGetters, mapActions, mapMutations } from 'vuex'
   import ShopDiscount from '../components/sellerList/ShopDiscount.vue'
+  import Modal from '../components/modal/Modal.vue'
 
   export default {
     name: 'Seller',
@@ -224,7 +226,7 @@
       goodsScroll(type) { // 索引滚动
         document.querySelector("#category" + type).scrollIntoView(true);
       },
-      changeStatus() {
+      changeStatus() { // 展示购物车
         this.cartStatus = !this.cartStatus;
         const mask = this.$refs.mask;
         if(this.cartStatus){
@@ -238,6 +240,9 @@
             mask.style.display = 'none';
           },300)
         }
+      },
+      showSyn() {
+        this.$refs.modal.showModal();
       }
     },
 
@@ -251,6 +256,7 @@
     },
     components: {
       'v-discount': ShopDiscount,
+      'v-modal': Modal,
     },
   }
 </script>
@@ -699,6 +705,12 @@
           border-radius: .32rem;
           padding: .053333rem .133333rem;
           font-size: .266667rem;
+        }
+        &.bottomNav-empty {
+          background-color: #666;
+          .iconfont {
+            color: #999;
+          }
         }
       }
       .bottomNav-cartInfo {
