@@ -76,14 +76,19 @@
     },
     methods: {
       ...mapActions({
-        UpdateList: 'getList', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+        UpdateList: 'getList',
+        getGoods: 'getGoods',
       }),
       ...mapMutations({
-        sellerSyn: 'SELLERSYN', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+        postSyn: 'SELLERSYN', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
       }),
       toSeller(data) {
-        this.$router.push({path: '/seller'});
-        this.sellerSyn(data);
+        console.log(this.sellerSyn.name, data.name);
+        if(this.sellerSyn.name !== data.name){
+          this.getGoods();
+          this.postSyn(data);
+        }
+        this.$router.push({path: '/seller', query: { id: data.name }});
       },
       backTop(e) {
         document.body.scrollTop = document.documentElement.scrollTop = 0;
@@ -107,6 +112,7 @@
     computed: {
       ...mapGetters([
         'spanning',
+        'sellerSyn',
         'sellerList',
       ])
     },
