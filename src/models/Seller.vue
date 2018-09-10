@@ -3,13 +3,15 @@
     <div class="seller-top">
       <div class="seller-title">
         <nav class="seller-banner" :style="{ 'background-image': 'url(&quot;'+sellerSyn.avatar+'&quot;)'}">
-          <a class="index--iRT3"></a>
+          <router-link :to="{ path: 'home'}" replace>
+            <a class="back" />
+          </router-link>
         </nav>
         <div class="seller-syn">
           <div class="seller-logo">
             <img class="logo" :src="sellerSyn.pics" :data-src-retina="sellerSyn.pics">
           </div>
-          <v-modal ref="modal" />
+          <seller-modal ref="SellerModal" />
           <div class="name">
             <h2 @click="showSyn">
               <span>{{ sellerSyn.name }}</span>
@@ -42,13 +44,12 @@
         </div>
       </div>
     </div>
-
     <div  style="height: 495px;">
       <div class="menuview">
         <main class="menuview-main">
           <div class="category">
             <ul class="categoryWrapper">
-              <li class="categoryItem" v-for="item in goods"  @click="goodsScroll(item.type)">
+              <li v-for="item in goods" :class="['categoryItem', {'active': type === item.type}]"  @click="goodsScroll(item.type)">
                 <i :class="['iconfont',
                       item.type==0?'icon-zhekou':
                       item.type==1?'icon-manjian':
@@ -71,35 +72,35 @@
                     </div>
                   </dt>
                   <dd v-for="(val, i) in item.foods">
-                    <div class="fooddetails-root">
-                      <span class="fooddetails-logo">
-                        <img :alt="val.name" :title="val.name" :src="val.image">
-                      </span>
-                      <section class="fooddetails-info">
-                        <p class="fooddetails-name">
-                          <span class="fooddetails-nameText">{{ val.name }}</span>
-                        </p>
-                        <p class="fooddetails-desc">{{ val.description }}</p>
-                        <p class="fooddetails-sales"></p>
-                        <div class="fooddetails-activityRow"></div>
-                        <span class="salesInfo-price fooddetails-salesInfo" style="color: rgb(255, 83, 57);">
-                        <span>{{ val.price }}</span>
-                        <del class="salesInfo-originPrice">¥{{ val.oldPrice }}</del>
-                      </span>
-                        <div class="fooddetails-button">
-                      <span>
-                        <span class="cartbutton-entitybutton">
-                          <a v-if="val.num" role="button" aria-label="添加商品" @click="changeNum(index, i, 'sub')">
-                            <i  class="iconfont icon-sub" />
-                          </a>
-                          <span v-if="val.num" role="button" class="cartbutton-entityquantity">
-                            {{ val.num||0 }}
-                          </span>
-                          <a role="button" aria-label="删减商品" @click="changeNum(index, i, 'add')">
-                            <i class="iconfont icon-add"/>
-                          </a>
+                    <div class="fooddetails-root"  @click="showGoodsInfo(val)">
+                        <span class="fooddetails-logo">
+                          <img :alt="val.name" :title="val.name" :src="val.image">
                         </span>
-                      </span>
+                        <section class="fooddetails-info">
+                          <p class="fooddetails-name">
+                            <span class="fooddetails-nameText">{{ val.name }}</span>
+                          </p>
+                          <p class="fooddetails-desc">{{ val.description }}</p>
+                          <p class="fooddetails-sales"></p>
+                          <div class="fooddetails-activityRow"></div>
+                          <span class="salesInfo-price fooddetails-salesInfo" style="color: rgb(255, 83, 57);">
+                          <span>{{ val.price }}</span>
+                            <del class="salesInfo-originPrice">¥{{ val.oldPrice }}</del>
+                          </span>
+                            <div class="fooddetails-button">
+                          <span>
+                            <span class="cartbutton-entitybutton">
+                              <a v-if="val.num" role="button" aria-label="添加商品" @click="changeNum(index, i, 'sub')">
+                                <i  class="iconfont icon-sub" />
+                              </a>
+                              <span v-if="val.num" role="button" class="cartbutton-entityquantity">
+                                {{ val.num||0 }}
+                              </span>
+                              <a role="button" aria-label="删减商品" @click="changeNum(index, i, 'add')">
+                                <i class="iconfont icon-add"/>
+                              </a>
+                            </span>
+                          </span>
                         </div>
                       </section>
                     </div>
@@ -112,7 +113,7 @@
       </div>
     </div>
     <footer class="cartview-cartview">
-      <div @click="changeStatus" ref="mask" class="cartview-cartmask" />
+      <div @click="cartControl" ref="mask" class="cartview-cartmask" />
       <div :class="['cartview-cartbody', {'cartview-cartbodyOpen': cartStatus}]" style="z-index: 11;">
         <section class="discount-tip-discountTip">
           <span v-if="(sellerSyn.deliveryPrice - cart.sum)>0">
@@ -172,9 +173,9 @@
         </div>
       </div>
       <div class="bottomNav-cartfooter" style="z-index: 11;">
-        <span @click="changeStatus" :class="['bottomNav-carticon', {'bottomNav-empty': cart.goods.length==0}]">
+        <span @click="cartControl" :class="['bottomNav-carticon', {'bottomNav-empty': cart.goods.length==0}]">
           <i class="iconfont icon-gouwuche" />
-          <span v-if="cart.goods.length">{{ cart.goods.length }}</span>
+          <span v-if="cart.goods.length">{{ cart.box?cart.box*2:0 }}</span>
         </span>
         <div role="button" aria-label="购物车有商品2件，共6元，另需配送费1.6元。" class="bottomNav-cartInfo">
           <p class="bottomNav-carttotal">
@@ -188,12 +189,14 @@
         </a>
       </div>
     </footer>
+    <goods-modal ref="GoodsModal"  :info="goodsInfo" />
   </div>
 </template>
 <script>
   import { mapGetters, mapActions, mapMutations } from 'vuex'
   import ShopDiscount from '../components/sellerList/ShopDiscount.vue'
-  import Modal from '../components/modal/Modal.vue'
+  import SellerModal from '../components/modal/SellerInfo.vue'
+  import GoodsModal from '../components/modal/GoodsInfo.vue'
 
   export default {
     name: 'Seller',
@@ -201,10 +204,14 @@
       return {
         cartStatus: false,
         title: 'Seller',
+        goodsInfo: {},
+        type: 0,
       }
     },
     mounted() {
-      this.getGoods();
+      if(!(this.goods&&this.goods.length)) {
+        this.getGoods();
+      }
     },
     methods: {
       ...mapActions({
@@ -224,25 +231,32 @@
         this.postGoods(data);
       },
       goodsScroll(type) { // 索引滚动
+        this.type = type;
         document.querySelector("#category" + type).scrollIntoView(true);
       },
-      changeStatus() { // 展示购物车
-        this.cartStatus = !this.cartStatus;
-        const mask = this.$refs.mask;
-        if(this.cartStatus){
-          mask.style.display = 'block';
-          window.setTimeout(() => {
-            mask.style.opacity = '0.4';
-          },50)
-        }else{
-          mask.style.opacity = '0';
-          window.setTimeout(() => {
-            mask.style.display = 'none';
-          },300)
+      cartControl() { // 展示购物车
+        if(this.cart.goods&&this.cart.goods.length) {
+          this.cartStatus = !this.cartStatus;
+          const mask = this.$refs.mask;
+          if (this.cartStatus) {
+            mask.style.display = 'block';
+            window.setTimeout(() => {
+              mask.style.opacity = '0.4';
+            }, 50)
+          } else {
+            mask.style.opacity = '0';
+            window.setTimeout(() => {
+              mask.style.display = 'none';
+            }, 300)
+          }
         }
       },
       showSyn() {
-        this.$refs.modal.showModal();
+        this.$refs.SellerModal.showModal();
+      },
+      showGoodsInfo(val) {
+        this.goodsInfo = val;
+        this.$refs.GoodsModal.showModal();
       }
     },
 
@@ -256,7 +270,8 @@
     },
     components: {
       'v-discount': ShopDiscount,
-      'v-modal': Modal,
+      'seller-modal': SellerModal,
+      'goods-modal': GoodsModal,
     },
   }
 </script>
@@ -278,6 +293,16 @@
         position: absolute;
         top: 0;
         left: 0;
+        .back {
+          margin-top: .3rem;
+          margin-left: .35rem;
+          width: .32rem;
+          height: .32rem;
+          display: inline-block;
+          border-bottom: .05rem solid #fff;
+          border-left: .05rem solid #fff;
+          transform: rotate(45deg);
+        }
       }
       .seller-syn {
         padding: .8rem 0 0;
