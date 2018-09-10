@@ -119,6 +119,7 @@
         vertical-align: text-bottom;
         white-space: nowrap;
         text-overflow: ellipsis;
+        overflow: hidden;
       }
     }
   }
