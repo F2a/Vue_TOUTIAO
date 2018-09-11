@@ -25,7 +25,12 @@
 |   |-- common                       // 公共资源目录
 |       |-- font                     // iconfont目录
 |       |-- style                    // 公共样式文件目录
-|   |-- components                   // 组件
+|   |-- components                   // 组件目录
+|       |-- header                   // 公共样式文件目录
+|   |-- models                       // 页面目录
+|   |-- router                       // 路由目录
+|   |-- store                        // vuex目录
+|   |-- utils                        // 通用工具文件
 |-- static                           // 静态资源目录
 ```
 
