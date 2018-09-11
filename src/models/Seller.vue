@@ -72,7 +72,7 @@
                     </div>
                   </dt>
                   <dd v-for="(val, i) in item.foods">
-                    <div class="fooddetails-root"  @click="showGoodsInfo(val)">
+                    <div class="fooddetails-root"  @click="showGoodsInfo(val, i, index)">
                         <span class="fooddetails-logo">
                           <img :alt="val.name" :title="val.name" :src="val.image">
                         </span>
@@ -89,17 +89,7 @@
                           </span>
                             <div class="fooddetails-button">
                           <span>
-                            <span class="cartbutton-entitybutton">
-                              <a v-if="val.num" role="button" aria-label="添加商品" @click="changeNum(index, i, 'sub')">
-                                <i  class="iconfont icon-sub" />
-                              </a>
-                              <span v-if="val.num" role="button" class="cartbutton-entityquantity">
-                                {{ val.num||0 }}
-                              </span>
-                              <a role="button" aria-label="删减商品" @click="changeNum(index, i, 'add')">
-                                <i class="iconfont icon-add"/>
-                              </a>
-                            </span>
+                            <entity-button :i="i" :index="index" :num="val.num" />
                           </span>
                         </div>
                       </section>
@@ -147,20 +137,10 @@
                 </span>
                 <span class="entityList-entitycartbutton">
                   <div class="fooddetails-button">
-                        <span>
-                          <span class="cartbutton-entitybutton">
-                             <a href="javascript:" role="button" aria-label="添加商品" @click="changeNum(item.index, item.i, 'sub')">
-                              <i  class="iconfont icon-sub" />
-                            </a>
-                            <span role="button" class="cartbutton-entityquantity">
-                              {{ item.num }}
-                            </span>
-                             <a role="button" aria-label="删减商品" @click="changeNum(item.index, item.i, 'add')">
-                              <i class="iconfont icon-add"/>
-                            </a>
-                          </span>
-                        </span>
-                      </div>
+                    <span>
+                      <entity-button :i="item.i" :index="item.index" :num="item.num" />
+                    </span>
+                  </div>
                 </span>
               </li>
             </ul>
@@ -189,7 +169,7 @@
         </a>
       </div>
     </footer>
-    <goods-modal ref="GoodsModal"  :info="goodsInfo" />
+    <goods-modal ref="GoodsModal"  :goods="goodsInfo" />
   </div>
 </template>
 <script>
@@ -197,6 +177,7 @@
   import ShopDiscount from '../components/sellerList/ShopDiscount.vue'
   import SellerModal from '../components/modal/SellerInfo.vue'
   import GoodsModal from '../components/modal/GoodsInfo.vue'
+  import Entitybutton from '../components/entitybutton/Entitybutton.vue'
 
   export default {
     name: 'Seller',
@@ -220,22 +201,12 @@
       ...mapMutations({
         postGoods: 'POSTGOODS',
       }),
-      changeNum(index, i, action) { //商品增减
-        console.log(action);
-        const data = this.goods;
-        if(action=='add'){
-          data[index].foods[i].num++;
-        }else if(action=='sub'&&data[index].foods[i].num>0){
-          data[index].foods[i].num--;
-        }
-        this.postGoods(data);
-      },
       goodsScroll(type) { // 索引滚动
         this.type = type;
         document.querySelector("#category" + type).scrollIntoView(true);
       },
       cartControl() { // 展示购物车
-        if(this.cart.goods&&this.cart.goods.length) {
+        if(this.cartStatus||(this.cart.goods&&this.cart.goods.length)) {
           this.cartStatus = !this.cartStatus;
           const mask = this.$refs.mask;
           if (this.cartStatus) {
@@ -254,7 +225,9 @@
       showSyn() {
         this.$refs.SellerModal.showModal();
       },
-      showGoodsInfo(val) {
+      showGoodsInfo(val, i, index) {
+        val.i = i;
+        val.index= index;
         this.goodsInfo = val;
         this.$refs.GoodsModal.showModal();
       }
@@ -272,6 +245,7 @@
       'v-discount': ShopDiscount,
       'seller-modal': SellerModal,
       'goods-modal': GoodsModal,
+      'entity-button': Entitybutton,
     },
   }
 </script>
@@ -780,31 +754,4 @@
     }
 
   }
-  /* 商品加减按钮 */
-  .cartbutton-entitybutton {
-    display: inline-flex;
-    font-size: .346667rem;
-    align-items: center;
-    .cartbutton-entityquantity {
-      display: inline-block;
-      text-align: center;
-      color: rgba(0,0,0,.87);
-      vertical-align: middle;
-      font-size: .373333rem;
-      width: .693333rem;
-      overflow: hidden;
-    }
-    a {
-      display: inline-block;
-      vertical-align: middle;
-      text-decoration: none;
-      margin: 0 3px;
-    }
-    i {
-      color: rgb(35, 149, 255);
-      font-size: 23px;
-      vertical-align: middle;
-    }
-  }
-
 </style>
