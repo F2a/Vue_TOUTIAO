@@ -26,8 +26,14 @@
 |       |-- font                     // iconfont目录
 |       |-- style                    // 公共样式文件目录
 |   |-- components                   // 组件目录
-|       |-- header                   // 公共样式文件目录
+|       |-- entitybutton             // 商品增添按钮
+|       |-- header                   // 顶部nav
+|       |-- meatTypes                // 首页食品分类
+|       |-- modal                    // 弹框模块
+|       |-- sellerList               // 商家列表
+|       |-- userBar                  // 顶部bar
 |   |-- models                       // 页面目录
+|       |-- Cart                     // 页面目录
 |   |-- router                       // 路由目录
 |   |-- store                        // vuex目录
 |   |-- utils                        // 通用工具文件
