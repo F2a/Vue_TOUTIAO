@@ -163,7 +163,10 @@
           </p>
           <p class="bottomNav-cartdelivery">另需配送费{{ sellerSyn.serviceScore }}元</p>
         </div>
-        <a role="button" :class="['submit-btn-submitbutton', {'submit-btn-disabled': (sellerSyn.deliveryPrice - cart.sum)>0 }, 'submit-btn-multiLine']">
+        <a role="button"
+           :class="['submit-btn-submitbutton', {'submit-btn-disabled': (sellerSyn.deliveryPrice - cart.sum)>0 }, 'submit-btn-multiLine']"
+           @click="toCart"
+        >
           <small v-if="(sellerSyn.deliveryPrice - cart.sum)>0">还差¥{{ sellerSyn.deliveryPrice - cart.sum }}起送</small>
           <span v-else>去结算</span>
         </a>
@@ -201,6 +204,10 @@
       ...mapMutations({
         postGoods: 'POSTGOODS',
       }),
+      toCart() {
+        if(this.sellerSyn.deliveryPrice - this.cart.sum < 0)
+          this.$router.push({ path: 'cart' })
+      },
       goodsScroll(type) { // 索引滚动
         this.type = type;
         document.querySelector("#category" + type).scrollIntoView(true);
