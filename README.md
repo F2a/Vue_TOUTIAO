@@ -33,7 +33,9 @@
 |       |-- sellerList               // 商家列表
 |       |-- userBar                  // 顶部bar
 |   |-- models                       // 页面目录
-|       |-- Cart                     // 页面目录
+|       |-- Home                     // 主页
+|       |-- Cart                     // 购物车页
+|       |-- Seller                   // 商家详情页
 |   |-- router                       // 路由目录
 |   |-- store                        // vuex目录
 |   |-- utils                        // 通用工具文件
