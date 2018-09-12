@@ -6,7 +6,7 @@
       </div>
       <div class="foodpanel-body">
         <div class="foodpanel-foodimg">
-          <img alt="米饭" src="//fuss10.elemecdn.com/6/92/7116116ecc9415258a1e36e1926a0jpeg.jpeg?imageMogr/format/webp/thumbnail/!375x375r/gravity/Center/crop/375x375/">
+          <img :alt="goods.name" :src="goods.image">
         </div>
         <div class="foodpanel-foodinfo">
           <div class="foodpanel-foodname">
@@ -48,7 +48,6 @@
         this.visible = true;
       },
       hideModal() {
-        console.log(11);
         this.visible = false;
       },
     },
@@ -75,8 +74,8 @@
       border-radius: 50%;
       background-color: rgba(0,0,0,.2);
       display: flex;
-      color: #aaa;
-      font-size: 0.5rem;
+      color: #eee;
+      font-size: .5rem;
       align-items: center;
       justify-content: center;
       position: absolute;
