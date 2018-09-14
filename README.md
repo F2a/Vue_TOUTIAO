@@ -42,7 +42,6 @@
 |-- static                           // 静态资源目录
 ```
 
-
 ``` bash
 # install dependencies
 npm install
