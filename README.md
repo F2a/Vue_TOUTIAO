@@ -39,6 +39,7 @@
 |   |-- router                       // 路由目录
 |   |-- store                        // vuex目录
 |   |-- utils                        // 通用工具文件
+|       |-- request                  // 封装的axios
 |-- static                           // 静态资源目录
 ```
 
