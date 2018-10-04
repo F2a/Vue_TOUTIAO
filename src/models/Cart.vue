@@ -1,6 +1,116 @@
 <template>
-  <div>
-    <h1>Cart</h1>
+  <div class="checkout">
+    <header class="header ElemeHeader-root">
+      <div class="ElemeHeader-wrapper ElemeHeader-gradientBg ElemeHeader-fixed" style="z-index: 8844;">
+        <div class="ElemeHeader-left">
+          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2LjU1MiA1LjYzM0wxNC41MDggMy41OSAyLjI0MyAxNS44NTMgMTQuNTA4IDI4LjQxbDIuMDQ0LTIuMDQzLTEwLjIyLTEwLjUxM3oiLz48L3N2Zz4=" class="ElemeHeader-leftArrow">
+        </div>
+        <h1 class="ElemeHeader-center">确认订单</h1>
+      </div>
+    </header>
+    <div class="main">
+      <section class="cart-address">
+        <div class="address-item">
+          <p class="title">
+            <span>订单配送至</span>
+          </p>
+          <p class="address-detail">
+            <span class="address-text">长征花园书院南路646号 长征花园 8栋 4单元 3楼 8438</span>
+          </p>
+          <h2 class="address-name">
+            <span>方</span>
+            <span>(先生)</span>
+            <span class="phone">17673047043</span>
+          </h2>
+        </div>
+      </section>
+      <div class="checkout-section key-card">
+        <section>
+          <div class="delivery">
+            <div class="delivery-left">
+              <div class="delivery-time">
+                <span class="cart-item__title">送达时间</span>
+              </div>
+            </div>
+            <div class="right">
+              <div class="delivery-select">
+                尽快送达(17:29送达)
+              </div>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="cart-item pay-way">
+            <div class="cart-item">支付方式</div>
+            <div>
+              <span class="pay-text">在线支付</span>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section class="checkout-section cart-group">
+        <h3 class="cart-group-shop">
+          <span class="cart-group">非常食刻韩式料理</span>
+          <span class="cart-group">(理工大学店)</span>
+        </h3>
+        <ul class="cart-group-food">
+          <li>
+            <div class="cart-group-center">
+              <p class="cart-group">五花肉饭+鸡蛋（送：泡菜、凉拌豆芽）</p>
+            </div>
+            <span class="num">×&nbsp;1</span>
+            <span class="cart-group-right">
+                <span class="cart-group">
+                  ¥
+                </span>
+                31.8
+              </span>
+          </li>
+        </ul>
+        <ul class="cart-group-food">
+          <li>
+            <div>
+                <span class="mini-tag cart-group">
+                  <span class="cart-group-tag" style="background-color: rgb(115, 240, 115);">包装</span>
+                </span>
+              <span class="cart-group-center">餐盒</span>
+            </div>
+            <div class="cart-group-right">
+              <span class="cart-group">¥</span>2
+            </div>
+          </li>
+          <li>
+            <div>
+                <span class="mini-tag cart-group">
+                  <span class="cart-group-tag mini-tag">商家</span>
+                </span>
+              <span class="cart-group-center">配送费</span>
+            </div>
+            <div class="cart-group-right">
+              <span class="cart-group">¥</span>0.1
+            </div>
+          </li>
+          <li>
+            <div class="cart-group">
+                <span class="cart-group-tag" style="background-color: rgb(240, 115, 115);">
+                  <span>立减</span>
+                </span>
+              <span class="cart-group-center">优惠</span>
+            </div>
+            <div class="cart-group-right">&nbsp;
+              <span class="cart-group">¥</span>18
+            </div>
+          </li>
+        </ul>
+        <div class="cart-group-total">
+          <div></div>
+          <div class="cart-group">
+            <div>小计 ¥<span style="font-size: .52rem; font-weight: 500">15.9</span></div>
+          </div>
+        </div>
+      </section>
+
+    </div>
   </div>
 </template>
 <script>
@@ -16,7 +126,7 @@
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
   .ElemeHeader-root {
-    height: 1.173333rem;
+    height: 1.15rem;
     .ElemeHeader-fixed {
       position: fixed;
       top: 0;
@@ -29,7 +139,7 @@
       height: 1.2rem;
       color: #fff;
       font-size: .48rem;
-      background: #2395ff;
+      background-image: linear-gradient(90deg,#0af,#0085ff);
       .ElemeHeader-left {
         display: flex;
         align-items: center;
@@ -53,115 +163,193 @@
       }
     }
   }
+  .checkout {
+    position: relative;
+    font-size: .426667rem;
+    color: #333;
+    min-height: 100%;
+  }
+  .main {
+    padding-left: .16rem;
+    padding-right: .16rem;
+    padding-bottom: 1.413333rem;
+    background-image: linear-gradient(0deg,#f5f5f5,#f5f5f5 65%,hsla(0,0%,96%,.3) 75%,hsla(0,0%,96%,0)),linear-gradient(270deg,#0085ff,#0af);
+  }
   .cart-address {
     background-color: transparent;
-    padding: .426667rem 0 0;
     min-height: 2.213333rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    .cart-address {
-      -webkit-flex: 0 100%;
+    flex: 0 100%;
+    padding: .2rem;
+    position: relative;
+    color: #fff;
+    overflow: hidden;
+    .address-item {
       flex: 0 100%;
       padding: 0 .2rem;
       position: relative;
       color: #fff;
+      text-align: left;
       overflow: hidden;
-      .address-item {
-        -webkit-flex: 0 100%;
-        flex: 0 100%;
-        padding: 0 .2rem;
-        position: relative;
-        color: #fff;
-        overflow: hidden;
-        .title {
-          font-size: .4rem;
-          line-height: 1.21;
-          color: hsla(0,0%,100%,.8);
-          span {
-            vertical-align: middle;
-          }
-        }
-        .address-detail {
-          font-size: .453333rem;
-          font-weight: 700;
-          line-height: 1.88;
-          overflow: hidden;
-          display: flex;
-          align-items: center;
-          .address-text {
-            font-size: .6rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            max-width: calc(100% - .4rem);
-          }
-        }
-        .address-name {
-          font-size: .37rem;
-          line-height: 1.21;
-          margin-bottom: .13rem;
-          .phone {
-            margin-left: .2rem;
-          }
-        }
-      }
-    }
-    .checkout-section {
-      &:not(:last-child) {
-        margin-bottom: .21rem;
-      }
-      .delivery {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px dotted #eee;
-        padding: .42rem 0;
-        .delivery-left {
-          flex: 1;
-          .delivery-time {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: .4rem;
-            font-weight: 500;
-          }
-          .delivery-extra {
-            margin-top: .08rem;
-            font-size: .293333rem;
-            word-spacing: .06rem;
-            .fengniao {
-              display: inline-block;
-              padding: .04rem .1rem;
-              line-height: 1;
-            }
-          }
-        }
-      }
-      .cart-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: .42rem .53rem;
+      .title {
         font-size: .4rem;
-        color: #333;
-        .pay-text {
-          color: #2395ff;
-          font-weight: 500;
+        line-height: 1.21;
+        color: hsla(0,0%,100%,.8);
+        span {
+          vertical-align: middle;
         }
       }
-      .cart-group {
-        padding: .42rem 0;
-        justify-content: flex-start;
-        align-items: center;
-        position: relative;
-        z-index: 1;
-        color: #333;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+      .address-detail {
+        font-size: .45rem;
+        font-weight: 700;
+        padding: .2rem 0;
         overflow: hidden;
-        background-size: 4px;
+        display: flex;
+        align-items: center;
+        .address-text {
+          font-size: .6rem;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: calc(100% - .4rem);
+        }
+      }
+      .address-name {
+        font-size: .37rem;
+        line-height: 1.21;
+        margin-bottom: .13rem;
+        .phone {
+          margin-left: .2rem;
+        }
       }
     }
   }
+  .checkout-section {
+    padding: 0 5vw;
+    margin: .2rem;
+    background: #fff;
+    box-shadow: 0 0.013333rem 0.026667rem 0 rgba(0,0,0,.05);
+    &:not(:last-child) {
+      margin-bottom: .21rem;
+    }
+    .delivery {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px dotted #eee;
+      padding: .6rem 0;
+      .delivery-select {
+        text-align: right;
+        color: #2395ff;
+      }
+      .delivery-left {
+        flex: 1;
+        .delivery-time {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: .4rem;
+          font-weight: 500;
+        }
+        .delivery-extra {
+          margin-top: .08rem;
+          font-size: .293333rem;
+          word-spacing: .06rem;
+          .fengniao {
+            display: inline-block;
+            padding: .04rem .1rem;
+            line-height: 1;
+          }
+        }
+      }
+    }
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: .4rem;
+      color: #333;
+      padding: .3rem 0;
+      .pay-text {
+        color: #2395ff;
+        font-weight: 500;
+      }
+    }
+    .cart-group-shop {
+      padding: .42rem 0;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: left;
+      position: relative;
+      color: #333;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      background-size: 4px;
+      .cart-group {
+        font-size: .45rem;
+        line-height: 1;
+        font-weight: 700;
+        &:last-child {
+          font-size: .35rem;
+          font-weight: 500;
+        }
+      }
+    }
+    .cart-group-center {
+      margin-left: 1vw;
+      overflow: hidden;
+      flex: 5;
+    }
+    .cart-group-right {
+      font-size: .42rem;
+      flex: 3;
+      text-align: right;
+    }
+    .cart-group-tag {
+      color: #fff;
+      font-size: .26rem;
+      background-color: #60acf4;
+      display: inline-block;
+      padding: .06rem;
+      border-radius: 2px;
+      vertical-align: middle;
+      overflow: hidden;
+    }
+    .cart-group-total {
+      padding: 4vw 0 4.8vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: .373333rem;
+      color: #333;
+    }
+    .cart-group-food {
+      margin-top: .06rem;
+      color: #333;
+      font-size: .4rem;
+      li {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: .45rem 0;
+        border-bottom: 1px dotted #eee;
+        font-size: .4rem;
+        color: inherit;
+        .num{
+          flex: 1;
+          text-align: right;
+          font-size: .32rem;
+        }
+        p {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
 </style>
