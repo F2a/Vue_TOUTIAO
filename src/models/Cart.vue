@@ -3,7 +3,9 @@
     <header class="header ElemeHeader-root">
       <div class="ElemeHeader-wrapper ElemeHeader-gradientBg ElemeHeader-fixed" style="z-index: 8844;">
         <div class="ElemeHeader-left">
-          <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIzMiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTE2LjU1MiA1LjYzM0wxNC41MDggMy41OSAyLjI0MyAxNS44NTMgMTQuNTA4IDI4LjQxbDIuMDQ0LTIuMDQzLTEwLjIyLTEwLjUxM3oiLz48L3N2Zz4=" class="ElemeHeader-leftArrow">
+          <router-link :to="{ path: 'Seller'}" replace>
+            <a class="back" />
+          </router-link>
         </div>
         <h1 class="ElemeHeader-center">确认订单</h1>
       </div>
@@ -34,7 +36,8 @@
             </div>
             <div class="right">
               <div class="delivery-select">
-                尽快送达(17:29送达)
+
+                尽快送达({{ deliveryTime }}送达)
               </div>
             </div>
           </div>
@@ -50,21 +53,20 @@
       </div>
       <section class="checkout-section cart-group">
         <h3 class="cart-group-shop">
-          <span class="cart-group">非常食刻韩式料理</span>
-          <span class="cart-group">(理工大学店)</span>
+          <span class="cart-group">{{ sellerSyn.name }}</span>
         </h3>
         <ul class="cart-group-food">
-          <li>
+          <li v-for="item in cart.goods">
             <div class="cart-group-center">
-              <p class="cart-group">五花肉饭+鸡蛋（送：泡菜、凉拌豆芽）</p>
+              <span class="cart-group">{{ item.name }}</span>
+              <span class="num">×&nbsp;{{ item.num }}</span>
             </div>
-            <span class="num">×&nbsp;1</span>
             <span class="cart-group-right">
-                <span class="cart-group">
-                  ¥
-                </span>
-                31.8
+              <span class="cart-group">
+                ¥
               </span>
+              {{ item.price }}
+            </span>
           </li>
         </ul>
         <ul class="cart-group-food">
@@ -76,7 +78,7 @@
               <span class="cart-group-center">餐盒</span>
             </div>
             <div class="cart-group-right">
-              <span class="cart-group">¥</span>2
+              <span class="cart-group">¥</span>{{ cart.box }}
             </div>
           </li>
           <li>
@@ -87,7 +89,7 @@
               <span class="cart-group-center">配送费</span>
             </div>
             <div class="cart-group-right">
-              <span class="cart-group">¥</span>0.1
+              <span class="cart-group">¥</span>{{ sellerSyn.serviceScore }}
             </div>
           </li>
           <li>
@@ -98,29 +100,60 @@
               <span class="cart-group-center">优惠</span>
             </div>
             <div class="cart-group-right">&nbsp;
-              <span class="cart-group">¥</span>18
+              <span class="cart-group">¥</span>{{ relief }}
             </div>
           </li>
         </ul>
         <div class="cart-group-total">
           <div></div>
           <div class="cart-group">
-            <div>小计 ¥<span style="font-size: .52rem; font-weight: 500">15.9</span></div>
+            <div>小计 ¥<span style="font-size: .52rem; font-weight: 500">{{ sum }}</span></div>
           </div>
         </div>
       </section>
     </div>
+    <footer id="footer" class="action-bar">
+      <span>¥{{ sum }}</span>
+      <small>
+      ｜已优惠¥{{ relief }}
+      </small>
+      <button class="submitbtn">去支付</button>
+    </footer>
   </div>
 </template>
 <script>
+  import moment from 'moment';
+  import { mapGetters, mapActions, mapMutations } from 'vuex'
+
   export default {
     name: 'Cart',
-    data () {
-      return {
-        title: 'Cart',
-      }
+    methods: {},
+    mounted() {
+      console.log(this.cart);
+      console.log(this.sellerSyn);
     },
-    methods: {}
+    computed: {
+      deliveryTime: function (){
+        const date = moment().add(this.sellerSyn.deliveryTime, 'minutes').format('HH:mm');
+        return date
+      },
+      relief: function (){
+        let amount = 0;
+        this.cart&&(this.cart.goods|| []).map((val, i) => {
+          amount += (val.oldPrice - val.price)
+        })
+        return amount
+      },
+      sum: function (){
+        let amount = this.cart.box + this.sellerSyn.serviceScore + this.cart.sum;
+        return amount
+      },
+      ...mapGetters([
+        'spanning',
+        'sellerSyn',
+        'cart',
+      ])
+    },
   }
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
@@ -160,6 +193,16 @@
         line-height: 1.173333rem;
         transform: translateX(-50%);
       }
+    }
+    .back {
+      margin-top: .3rem;
+      margin-left: .35rem;
+      width: .32rem;
+      height: .32rem;
+      display: inline-block;
+      border-bottom: .05rem solid #fff;
+      border-left: .05rem solid #fff;
+      transform: rotate(45deg);
     }
   }
   .checkout {
@@ -337,6 +380,9 @@
         border-bottom: 1px dotted #eee;
         font-size: .4rem;
         color: inherit;
+        .cart-group-center{
+          text-align: left;
+        }
         .num{
           flex: 1;
           text-align: right;
@@ -350,5 +396,40 @@
       }
     }
   }
-
+  .action-bar {
+    height: 1.173333rem;
+    text-align: left;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: #3c3c3c;
+    z-index: 2;
+    .submitbtn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      background: #00e067;
+      min-width: 2.8rem;
+      padding: 0 .15rem;
+      border: none;
+      color: #fff;
+      font-size: .45rem;
+    }
+    span {
+      color: #fff;
+      font-size: .48rem;
+      line-height: 1rem;
+      padding-left: .3rem;
+      vertical-align: middle;
+    }
+    small {
+      display: inline-block;
+      color: #999;
+      font-size: .3rem;
+      vertical-align: middle;
+      margin-top: 3px;
+    }
+  }
 </style>
