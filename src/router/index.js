@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from '@/models/Home';
 import Seller from '@/models/Seller';
 import Cart from '@/models/Cart';
+import Search from '@/models/Search';
 
 Vue.use(Router);
 
@@ -26,6 +27,11 @@ export default new Router({
       path: '/cart',
       name: 'Cart',
       component: Cart,
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search,
     },
   ],
 });

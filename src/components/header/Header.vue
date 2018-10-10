@@ -11,7 +11,7 @@
           </span>
           <i class="iconfont icon-arrow-right" />
         </a>
-        <a class="search-icon-wrap">
+        <a class="search-icon-wrap" @click="toSearch()">
           <i class="iconfont icon-search"></i>
           <span class="search-text">搜索美团商家、商品名称</span>
         </a>
@@ -35,7 +35,11 @@
         transform: false,
       }
     },
-    methods: {},
+    methods: {
+      toSearch(key) {
+        this.$router.push({path: '/search', query: { key }});
+      }
+    },
     mounted() {
       window.addEventListener('scroll', (e) => {
         console.log(this.transform);
