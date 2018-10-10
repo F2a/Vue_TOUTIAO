@@ -72,7 +72,7 @@
     mounted() {
       this.UpdateList();
       window.addEventListener('scroll', this.pushList);
-      this.offsetTop = (this.$refs.poifilterNav.offsetTop||396) - (this.marginTop||0);
+      this.offsetTop = (this.$refs.poifilterNav.offsetTop||396) - (this.marginTop||0); // 离顶部的距离
     },
     methods: {
       ...mapActions({
