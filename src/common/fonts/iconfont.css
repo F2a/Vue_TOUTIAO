@@ -38,17 +38,17 @@
 
 .icon-search:before { content: "\e606"; color: #999; }
 
-.icon-meishi:before { content: "\e642"; color: #F7B55D; }
+.icon-meishi:before { content: "\e642"; }
 
-.icon-tianpin:before { content: "\e600"; color: #17C295; }
+.icon-tianpin:before { content: "\e600"; }
 
-.icon-wancan:before { content: "\e6e7"; color: #9874DB;  }
+.icon-wancan:before { content: "\e6e7"; }
 
-.icon-xiaochi14:before { content: "\e644"; color: #17C295; }
+.icon-xiaochi14:before { content: "\e644"; }
 
-.icon-meituanwaimai:before { content: "\e9ab"; color: #4EA8EC; }
+.icon-meituanwaimai:before { content: "\e9ab"; }
 
-.icon-chaocaishouru:before { content: "\e643"; color: #F2725D; }
+.icon-chaocaishouru:before { content: "\e643"; }
 
 .icon-youhuijuan:before { content: "\e768"; color: #F2725D; }
 
@@ -60,11 +60,11 @@
 
 .icon-weibiaoti-:before { content: "\e613"; color: #17C295; }
 
-.icon-chaoshi:before { content: "\e727"; color: #9874DB; }
+.icon-chaoshi:before { content: "\e727"; }
 
 .icon-manjian:before { content: "\e62b"; color: #F2725D; }
 
-.icon-ziyuan:before { content: "\e635"; color: #17C295; }
+.icon-ziyuan:before { content: "\e635"; }
 
 .icon-mail:before { content: "\e601"; color: #F2725D; }
 
