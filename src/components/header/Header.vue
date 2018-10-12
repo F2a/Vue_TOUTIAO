@@ -2,7 +2,7 @@
   <div>
     <div ref="homeHeader" class="header">
       <div :class="['home-header', {'backHeader': transform}]">
-        <a class="header-loc">
+        <a class="header-loc" @click="toLocation()">
           <i class="iconfont icon-loc-hollow" />
           <span class="header-loc-txt">
             <span class="header-loc-txt-marquee" data-address="">
@@ -38,7 +38,10 @@
     methods: {
       toSearch(key) {
         this.$router.push({path: '/search', query: { key }});
-      }
+      },
+      toLocation(key) {
+        this.$router.push({path: '/location', query: { key }});
+      },
     },
     mounted() {
       window.addEventListener('scroll', (e) => {
