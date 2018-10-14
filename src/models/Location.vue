@@ -10,17 +10,38 @@
         <h1 class="ElemeHeader-center">选择收货地址</h1>
       </div>
     </header>
+    <form class="fromBox">
+      <p>
+        {{ city }}
+        <i class="iconfont icon-loc-hollow" />
+      </p>
+      <div class="search">
+        <i class="iconfont icon-search"></i>
+        <input type="search" placeholder="输入地址">
+      </div>
+    </form>
+    <v-amap />
   </div>
 </template>
 <script>
+  import amap from '../components/vueAmap/Amap.vue';
+
   export default {
     name: 'Location',
     data () {
       return {
-        title: 'Location',
-      }
+        city: '---',
+      };
     },
-    methods: {}
+    components: {
+      "v-amap": amap,
+    },
+    methods: {
+
+    },
+    mounted() {
+
+    },
   }
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
@@ -71,5 +92,44 @@
       border-left: .05rem solid #fff;
       transform: rotate(45deg);
     }
+  }
+  .fromBox {
+    display: flex;
+    position: relative;
+    flex-grow: 1;
+    padding: .293333rem .293333rem .293333rem 0;
+    margin-left: .293333rem;
+    background-color: #fff;
+    z-index: 101;
+    p {
+      -webkit-box-flex: 1;
+      flex-grow: 1;
+      font-size: .4rem;
+      line-height: 1rem;
+    }
+    .search {
+      height: 1rem;
+      -webkit-box-flex: 3;
+      flex-grow: 3;
+      position: relative;
+      i {
+        position: absolute;
+        top: .22rem;
+        left: .22rem;
+      }
+      input {
+        width: 100%;
+        height: 1rem;
+        display: block;
+        padding-left: .85rem;
+        -webkit-appearance: none;
+        background-color: #f8f8f8;
+        font-size: .4rem;
+        color: #666;
+        border: none;
+        outline: none;
+      }
+    }
+
   }
 </style>
