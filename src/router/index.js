@@ -4,6 +4,7 @@ import Home from '@/models/Home';
 import Seller from '@/models/Seller';
 import Cart from '@/models/Cart';
 import Search from '@/models/Search';
+import Location from '@/models/Location';
 
 Vue.use(Router);
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/search',
       name: 'Search',
       component: Search,
+    },
+    {
+      path: '/location',
+      name: 'Location',
+      component: Location,
     },
   ],
 });
