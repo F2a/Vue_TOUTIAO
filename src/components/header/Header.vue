@@ -6,7 +6,7 @@
           <i class="iconfont icon-loc-hollow" />
           <span class="header-loc-txt">
             <span class="header-loc-txt-marquee" data-address="">
-              弘林国际大厦
+              {{ marquee }}
             </span>
           </span>
           <i class="iconfont icon-arrow-right" />
@@ -27,12 +27,22 @@
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     name: 'Content',
     data () {
       return {
         title: 'Content',
         transform: false,
+      }
+    },
+    computed: {
+      ...mapGetters([
+        'position',
+      ]),
+      marquee() {
+        return this.position.aois&&this.position.aois.length?this.position.aois[0].name:'请选择配送地址'
       }
     },
     methods: {
@@ -76,7 +86,7 @@
     .header-loc {
       float: left;
       height: 20px;
-      padding: 5px;
+      padding: 5px 0;
       color: #ffffff;
       font-size: 17px;
       background: rgba(0,0,0,0.3);
@@ -85,15 +95,25 @@
       border-radius: 13px;
       margin-left: 10px;
       position: relative;
-      max-width: 40%;
+      width: 45%;
       margin-right: 12px;
+      .icon-loc-hollow {
+        position: absolute;
+        top: 6px;
+        left: 5px;
+      }
+      .icon-arrow-right {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+      }
       .header-loc-txt {
         display: inline-block;
         box-sizing: border-box;
         max-width: 100%;
         overflow: hidden;
         vertical-align: middle;
-        padding: 0 10px;
+        padding: 0 25px;
         .header-loc-txt-marquee {
           white-space: nowrap;
           display: inline-block;
