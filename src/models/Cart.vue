@@ -17,7 +17,9 @@
             <span>订单配送至</span>
           </p>
           <p class="address-detail">
-            <span class="address-text">长征花园书院南路646号 长征花园 8栋 4单元 3楼 8438</span>
+            <span class="address-text">
+              {{ position.pois&&position.pois.length?(position.pois[0].address + position.pois[0].name):'请选择配送地址' }}
+            </span>
           </p>
           <h2 class="address-name">
             <span>方</span>
@@ -152,6 +154,7 @@
         'spanning',
         'sellerSyn',
         'cart',
+        'position',
       ])
     },
   }

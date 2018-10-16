@@ -3,7 +3,7 @@
     <header class="header ElemeHeader-root">
       <div class="ElemeHeader-wrapper ElemeHeader-gradientBg ElemeHeader-fixed" style="z-index: 8844;">
         <div class="ElemeHeader-left">
-          <router-link :to="{ path: 'Seller'}" replace>
+          <router-link :to="{ path: 'Home'}" replace>
             <a class="back" />
           </router-link>
         </div>
@@ -12,18 +12,19 @@
     </header>
     <form class="fromBox">
       <p>
-        {{ city }}
+        {{ position.addressComponent?position.addressComponent.city:'---' }}
         <i class="iconfont icon-loc-hollow" />
       </p>
       <div class="search">
         <i class="iconfont icon-search"></i>
-        <input type="search" placeholder="输入地址">
+        <input v-model="position.formattedAddress||''" type="search" placeholder="输入地址">
       </div>
     </form>
-    <v-amap />
+    <v-amap ref="amap"  @position="GetPosition" />
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
   import amap from '../components/vueAmap/Amap.vue';
 
   export default {
@@ -31,16 +32,31 @@
     data () {
       return {
         city: '---',
+        formattedAddress: '',
+        // position: {}
       };
+    },
+    computed: {
+      ...mapGetters([
+        'position',
+      ]),
     },
     components: {
       "v-amap": amap,
     },
     methods: {
-
+      GetPosition(value) {
+//        console.log(value);
+//        this.position = value;
+//        this.city = value.addressComponent.city;
+//        this.formattedAddress = value.formattedAddress;
+      }
     },
     mounted() {
-
+//      console.log(this.$refs.amap.position);
+//      if(this.$refs.amap.position.addressComponent) {
+//        this.city = this.$refs.amap.position.addressComponent.city
+//      }
     },
   }
 </script>
