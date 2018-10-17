@@ -16,7 +16,7 @@
           <p class="title">
             <span>订单配送至</span>
           </p>
-          <p class="address-detail">
+          <p class="address-detail" @click="toLocation">
             <span class="address-text">
               {{ position.pois&&position.pois.length?(position.pois[0].address + position.pois[0].name):'请选择配送地址' }}
             </span>
@@ -129,7 +129,13 @@
 
   export default {
     name: 'Cart',
-    methods: {},
+    methods: {
+      toLocation(key) {
+        if(!(this.position.pois&&this.position.pois.length)){
+          this.$router.push({path: '/location', query: { key }});
+        }
+      },
+    },
     mounted() {
       console.log(this.cart);
       console.log(this.sellerSyn);
