@@ -10,6 +10,7 @@
 * 模拟接口 easy-mock
 * 接口封装 axios
 * 组件库 mint-ui
+* map地图 vue-amap
 
 
 ### 功能模块
@@ -32,10 +33,13 @@
 |       |-- modal                    // 弹框模块
 |       |-- sellerList               // 商家列表
 |       |-- userBar                  // 顶部bar
+|       |-- vueAmap                  // 地图定位
 |   |-- models                       // 页面目录
 |       |-- Home                     // 主页
 |       |-- Cart                     // 购物车页
 |       |-- Seller                   // 商家详情页
+|       |-- Search                   // 商家搜索页
+|       |-- Location                 // 定位地址页
 |   |-- router                       // 路由目录
 |   |-- store                        // vuex目录
 |   |-- utils                        // 通用工具文件
