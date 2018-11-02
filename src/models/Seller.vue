@@ -33,13 +33,13 @@
     <div class="seller-tab">
       <div class="shop-tab-1MgBk">
         <div class="shop-tab-2ipt1 shop-tab-nD6jp">
-          <p class="shop-tab-2H0qT">
-            点餐<span class="shop-tab-1GaSq" style="background-color: rgb(35, 149, 255);"></span>
+          <p class="shop-tab-select">
+            点餐<span class="shop-tab"></span>
           </p>
         </div>
         <div class="shop-tab-2ipt1">
-          <p class="shop-tab-2H0qT">
-            评价<span class="shop-tab-1GaSq" style="background-color: rgb(35, 149, 255);"></span>
+          <p>
+            评价<span class="shop-tab"></span>
           </p>
         </div>
       </div>
@@ -355,12 +355,12 @@
         font-size: .4rem;
         color: #666;
         border-bottom: 1px solid #ebebeb;
-        .shop-tab-2H0qT {
+        .shop-tab-select {
           display: inline-block;
           position: relative;
           color: #333;
           font-weight: 700;
-          .shop-tab-1GaSq {
+          .shop-tab {
             content: "";
             position: absolute;
             bottom: 0;
