@@ -1,9 +1,9 @@
 <template>
   <div id="top-sellerList">
     <nav ref="poifilterNav" :class="['poifilter-nav', {'fixed-nav': transform}]">
-      <a href="javascript:;" class="nav-item nav-right-sep">选项一</a>
-      <a href="javascript:;" class="nav-item nav-right-sep">综合排序</a>
-      <a href="javascript:;" class="nav-item">筛选</a>
+      <a class="nav-item nav-right-sep">综合排序</a>
+      <a class="nav-item">距离最近</a>
+      <a class="nav-item">筛选</a>
     </nav>
     <div
       id="poilist"
@@ -177,6 +177,10 @@
         background: url(//xs01.meituan.net/waimai_i/img/select.71c1597f.png) no-repeat left 2px;
         background-size: 12px;
         display: inline-block;
+      }
+      &:nth-child(2):after {
+        content: '';
+        display: none;
       }
     }
     .focus:after {
