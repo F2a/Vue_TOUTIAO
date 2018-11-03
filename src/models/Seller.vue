@@ -33,46 +33,47 @@
     <div class="seller-tab">
       <div class="shop-tab-1MgBk">
         <div class="shop-tab-2ipt1 shop-tab-nD6jp">
-          <p class="shop-tab-select">
+          <p :class="{'shop-tab-select': select==='foods'}" @click="selectTap('foods')">
             点餐<span class="shop-tab"></span>
           </p>
         </div>
         <div class="shop-tab-2ipt1">
-          <p>
+          <p :class="{'shop-tab-select': select==='ratings'}" @click="selectTap('ratings')">
             评价<span class="shop-tab"></span>
           </p>
         </div>
       </div>
     </div>
-    <div  style="height: 495px;">
-      <div class="menuview">
-        <main class="menuview-main">
-          <div class="category">
-            <ul class="categoryWrapper">
-              <li v-for="item in goods" :class="['categoryItem', {'active': type === item.type}]"  @click="goodsScroll(item.type)">
-                <i :class="['iconfont',
+    <div style="height: 500px;overflow: hidden">
+      <div class="viewBox">
+        <div class="menuview" :style="{ 'margin-left': select==='foods'?'0':'-50%' }">
+          <main class="menuview-main">
+            <div class="category">
+              <ul class="categoryWrapper">
+                <li v-for="item in goods" :class="['categoryItem', {'active': type === item.type}]"  @click="goodsScroll(item.type)">
+                  <i :class="['iconfont',
                       item.type==0?'icon-zhekou':
                       item.type==1?'icon-manjian':
                       item.type==3?'icon-chaocaishouru':
                       item.type==5?'icon-youhuijuan':
                       item.type==6?'icon-tianpin':
                       item.type==9?'icon-manjian':'hidden' ]"
-                /><span :style="{ width: item.type!=2&&item.type!=4&&item.type!=7&&item.type!=8?'75%':'100%' }">{{ item.name }}</span>
-              </li>
-            </ul>
-          </div>
-          <section class="container menuList">
-            <div class="scroller">
-              <dl role="menu">
-                <div v-for="(item, index) in goods">
-                  <dt :id="'category' + item.type" role="heading" :aria-label="item.name" >
+                  /><span :style="{ width: item.type!=2&&item.type!=4&&item.type!=7&&item.type!=8?'75%':'100%' }">{{ item.name }}</span>
+                </li>
+              </ul>
+            </div>
+            <section class="container menuList">
+              <div class="scroller">
+                <dl role="menu">
+                  <div v-for="(item, index) in goods">
+                    <dt :id="'category' + item.type" role="heading" :aria-label="item.name" >
                     <div class="category-title">
                       <strong class="category-name">{{ item.name }}</strong>
                       <span class="category-desc"></span>
                     </div>
-                  </dt>
-                  <dd v-for="(val, i) in item.foods">
-                    <div class="fooddetails-root"  @click="showGoodsInfo(val, i, index)">
+                    </dt>
+                    <dd v-for="(val, i) in item.foods">
+                      <div class="fooddetails-root"  @click="showGoodsInfo(val, i, index)">
                         <span class="fooddetails-logo">
                           <img :alt="val.name" :title="val.name" :src="val.image">
                         </span>
@@ -87,19 +88,23 @@
                           <span>{{ val.price }}</span>
                             <del class="salesInfo-originPrice">¥{{ val.oldPrice }}</del>
                           </span>
-                            <div class="fooddetails-button">
+                          <div class="fooddetails-button">
                           <span>
                             <entity-button :i="i" :index="index" :num="val.num" />
                           </span>
-                        </div>
-                      </section>
-                    </div>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </section>
-        </main>
+                          </div>
+                        </section>
+                      </div>
+                    </dd>
+                  </div>
+                </dl>
+              </div>
+            </section>
+          </main>
+        </div>
+        <div class="ratings">
+          评价
+        </div>
       </div>
     </div>
     <footer class="cartview-cartview">
@@ -190,6 +195,7 @@
         title: 'Seller',
         goodsInfo: {},
         type: 0,
+        select: 'foods',
       }
     },
     mounted() {
@@ -237,7 +243,10 @@
         val.index= index;
         this.goodsInfo = val;
         this.$refs.GoodsModal.showModal();
-      }
+      },
+      selectTap(val) {
+        this.select = val;
+      },
     },
 
     computed: {
@@ -374,170 +383,176 @@
       }
     }
   }
-  .menuview{
+  .viewBox{
+    display: flex;
+    width: 200%;
     height: 100%;
-    padding-bottom: 1.62rem;
-    background-color: #fff;
-    .menuview-main {
-      display: flex;
+    .menuview{
       height: 100%;
-      /* 左侧分类条 */
-      .category {
-        overflow-y: auto;
-        width: 21vw;
+      padding-bottom: 1.62rem;
+      background-color: #fff;
+      transition: margin .3s ease;
+      .menuview-main {
+        display: flex;
         height: 100%;
-        background-color: #f8f8f8;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 1rem;
-        .categoryWrapper {
-          flex: none;
-          position: relative;
-          z-index: 0;
-          .categoryItem {
+        /* 左侧分类条 */
+        .category {
+          overflow-y: auto;
+          width: 21vw;
+          height: 100%;
+          background-color: #f8f8f8;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 1rem;
+          .categoryWrapper {
+            flex: none;
             position: relative;
-            color: #666;
-            line-height: 16px;
-            font-size: .32rem;
-            text-align: left;
-            padding: .46rem .2rem;
-            span {
-              display: inline-block;
-              width: 75%;
-            }
-            &.active {
-              color: #333;
-              background-color: #fff;
-            }
-            .iconfont {
-              width: 20%;
-              height: .35rem;
-              font-size: 14px;
-              vertical-align: top;
-              margin-right: .08rem;
+            z-index: 0;
+            .categoryItem {
+              position: relative;
+              color: #666;
+              line-height: 16px;
+              font-size: .32rem;
+              text-align: left;
+              padding: .46rem .2rem;
+              span {
+                display: inline-block;
+                width: 75%;
+              }
+              &.active {
+                color: #333;
+                background-color: #fff;
+              }
+              .iconfont {
+                width: 20%;
+                height: .35rem;
+                font-size: 14px;
+                vertical-align: top;
+                margin-right: .08rem;
+              }
             }
           }
         }
-      }
-      /* 右侧商品列表 */
-      .menuList {
-        position: relative;
-        height: 100%;
-        width: 79vw;
-        .scroller {
+        /* 右侧商品列表 */
+        .menuList {
+          position: relative;
           height: 100%;
-          padding-bottom: 1rem;
-          overflow-y: auto;
-          scroll-behavior: smooth; /* 平滑滚动 */
-          -webkit-overflow-scrolling: touch;
-          dl{
-            margin: 0;
-            dt {
-              position: relative;
-              margin-left: .26rem;
-              padding: .4rem .8rem .2rem 0;
-              .category-title {
-                display: flex;
-                align-items: center;
-                overflow: hidden;
-                .category-name {
-                  margin-right: .133333rem;
-                  font-weight: 700;
-                  font-size: .32rem;
-                  color: #666;
-                  -webkit-flex: none;
-                  flex: none;
-                }
-                span[data-v-782b8f42] {
-                  flex: 1;
-                  color: #999;
-                  font-size: .266667rem;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                }
-              }
-            }
-            dd {
-              position: relative;
+          width: 79vw;
+          .scroller {
+            height: 100%;
+            padding-bottom: 1rem;
+            overflow-y: auto;
+            scroll-behavior: smooth; /* 平滑滚动 */
+            -webkit-overflow-scrolling: touch;
+            dl{
               margin: 0;
-              min-height: 3.066667rem;
-              padding-left: .266667rem;
-              .fooddetails-root {
-                padding: .266667rem 0;
-                margin-bottom: .013333rem;
-                display: flex;
-                min-height: 2.746667rem;
+              dt {
                 position: relative;
-                .fooddetails-logo {
-                  width: 2.533333rem;
-                  height: 2.533333rem;
-                  flex: none;
-                  margin-right: .266667rem;
-                  position: relative;
-                  img {
-                    width: 100%;
-                    border-radius: .053333rem;
+                margin-left: .26rem;
+                padding: .4rem .8rem .2rem 0;
+                .category-title {
+                  display: flex;
+                  align-items: center;
+                  overflow: hidden;
+                  .category-name {
+                    margin-right: .133333rem;
+                    font-weight: 700;
+                    font-size: .32rem;
+                    color: #666;
+                    -webkit-flex: none;
+                    flex: none;
                   }
-                }
-                .fooddetails-info {
-                  -webkit-flex: 1;
-                  flex: 1;
-                  position: relative;
-                  padding-bottom: .666667rem;
-                  padding-right: .4rem;
-                  .fooddetails-name {
-                    position: relative;
-                    padding-right: .4rem;
-                    display: -webkit-flex;
-                    display: flex;
-                    align-items: start;
-                    text-align: left;
-                    span {
-                      font-weight: 700;
-                      overflow: hidden;
-                      font-size: .4rem;
-                      white-space: nowrap;
-                      width: 4rem;
-                      text-overflow: ellipsis;
-                    }
-                  }
-                  .fooddetails-desc {
-                    margin: .133333rem 0;
-                    font-size: .266667rem;
-                    text-align: left;
+                  span[data-v-782b8f42] {
+                    flex: 1;
                     color: #999;
+                    font-size: .266667rem;
+                    white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    white-space: nowrap;
-                    width: 4.266667rem;
                   }
-                  .salesInfo-originPrice {
-                    font-size: .32rem;
-                    color: #999;
-                    margin-left: .16rem;
-                  }
-                  .salesInfo-price {
-                    position: absolute;
-                    bottom: 0;
-                    font-size: .48rem;
-                    line-height: .426667rem;
-                    color: #ff5339;
-                    padding-bottom: .093333rem;
-                    display: -webkit-flex;
-                    display: flex;
-                    -webkit-align-items: baseline;
-                    align-items: baseline;
-                    &:before {
-                      content: "\A5";
-                      font-size: .373333rem;
-                      display: inline-block;
-                      margin-right: .266667vw;
+                }
+              }
+              dd {
+                position: relative;
+                margin: 0;
+                min-height: 3.066667rem;
+                padding-left: .266667rem;
+                .fooddetails-root {
+                  padding: .266667rem 0;
+                  margin-bottom: .013333rem;
+                  display: flex;
+                  min-height: 2.746667rem;
+                  position: relative;
+                  .fooddetails-logo {
+                    width: 2.533333rem;
+                    height: 2.533333rem;
+                    flex: none;
+                    margin-right: .266667rem;
+                    position: relative;
+                    img {
+                      width: 100%;
+                      border-radius: .053333rem;
                     }
                   }
-                  .fooddetails-button {
-                    position: absolute;
-                    right: .4rem;
-                    bottom: .066667rem;
+                  .fooddetails-info {
+                    -webkit-flex: 1;
+                    flex: 1;
+                    position: relative;
+                    padding-bottom: .666667rem;
+                    padding-right: .4rem;
+                    .fooddetails-name {
+                      position: relative;
+                      padding-right: .4rem;
+                      display: -webkit-flex;
+                      display: flex;
+                      align-items: start;
+                      text-align: left;
+                      span {
+                        font-weight: 700;
+                        overflow: hidden;
+                        font-size: .4rem;
+                        white-space: nowrap;
+                        width: 4rem;
+                        text-overflow: ellipsis;
+                      }
+                    }
+                    .fooddetails-desc {
+                      margin: .133333rem 0;
+                      font-size: .266667rem;
+                      text-align: left;
+                      color: #999;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      width: 4.266667rem;
+                    }
+                    .salesInfo-originPrice {
+                      font-size: .32rem;
+                      color: #999;
+                      margin-left: .16rem;
+                    }
+                    .salesInfo-price {
+                      position: absolute;
+                      bottom: 0;
+                      font-size: .48rem;
+                      line-height: .426667rem;
+                      color: #ff5339;
+                      padding-bottom: .093333rem;
+                      display: -webkit-flex;
+                      display: flex;
+                      -webkit-align-items: baseline;
+                      align-items: baseline;
+                      &:before {
+                        content: "\A5";
+                        font-size: .373333rem;
+                        display: inline-block;
+                        margin-right: .266667vw;
+                      }
+                    }
+                    .fooddetails-button {
+                      position: absolute;
+                      right: .4rem;
+                      bottom: .066667rem;
+                    }
                   }
                 }
               }
