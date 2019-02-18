@@ -19,7 +19,7 @@
       <div class="bnrs-wrap">
         <div id="bnrs" class="bnrs">
           <a class="baitem" href="javascript:;" data-app="1">
-            <img src="//xs01.meituan.net/waimai_i/img/bannertemp.e8a6fa63.jpg" data-src-retina="//xs01.meituan.net/waimai_i/img/bannertemp.e8a6fa63.jpg" class="needsclick" style="width: 100%;">
+            <img src="../../assets/logo.jpg" style="width: 100%;">
           </a>
         </div>
       </div>
