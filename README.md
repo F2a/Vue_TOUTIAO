@@ -4,7 +4,7 @@
 > 使用Vue仿写《美团外卖》app
 
 
-### 插件和工具
+### 演示
 [在线演示](https://f2a.github.io/Vue_meituan/)
 
 ### 插件和工具
